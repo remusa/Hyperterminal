@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Hyperterminal">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/Hyperterminal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

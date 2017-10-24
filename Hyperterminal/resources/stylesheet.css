@@ -1,0 +1,47 @@
+#root {
+    -fx-background-color: #ffffff;
+}
+
+.chart {
+    /*-fx-legend-side: top;*/
+    /*-fx-legend-visible: true;*/
+    /*-fx-title-side: bottom;*/
+}
+
+.chart-content {
+    /*-fx-background-color: #80f2ff;*/
+}
+
+.chart-title {
+    /*-fx-font-family: "Aeial";*/
+    /*-fx-font-size: 16px;*/
+    /*-fx-font-weight: bold;*/
+}
+
+.chart-legend {
+    /*-fx-background-color: lightgray;*/
+}
+
+.chart-legend-item {
+    /*-fx-font-size: 16px;*/
+}
+
+.chart-legend-item-symbol {
+    /*-fx-shape: "M0 -3.5 v7 l 4 -3.5z";*/
+}
+
+#chartTemperature.chart {
+    /*-fx-padding: 10px;*/
+    /*-fx-background-color: #00BCD4;*/
+    /*-fx-text-fill: white;*/
+}
+
+#chartResistance.chart {
+    /*-fx-background-color: #00BCD4;*/
+    /*-fx-text-fill: white;*/
+}
+
+#chartTemperatureNTC.chart {
+    /*-fx-background-color: #00BCD4;*/
+    /*-fx-text-fill: white;*/
+}
