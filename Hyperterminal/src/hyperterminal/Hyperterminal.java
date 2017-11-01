@@ -28,7 +28,6 @@ import java.io.OutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
 import static javafx.geometry.HPos.CENTER;
 
@@ -83,7 +82,8 @@ public class Hyperterminal extends Application {
         tfKeyPressed = new TextField("Teclado: \n");
 
         // calibrate NTC
-        tfCalibrateNTC = new TextField("20");
+        tfCalibrateNTC = new TextField("");
+        tfCalibrateNTC.setEditable(false);
 
         // temperature LM35
         lbTemperature = new Label();
@@ -106,7 +106,8 @@ public class Hyperterminal extends Application {
 //        chartTemperature.setLegendVisible(false);
         chartTemperature.setId("chartTemperature");
         chartTemperature.setAnimated(true);
-        chartTemperature.setTitle("Temperatura LM35");
+//        chartTemperature.setTitle("Temperatura LM35");
+        chartTemperature.setTitle("Temperatura");
         chartTemperature.setHorizontalGridLinesVisible(true);
         seriesTemperature.setName("Temperatura");
         chartTemperature.getData().add(seriesTemperature);
@@ -132,7 +133,8 @@ public class Hyperterminal extends Application {
 //        chartResistance.setLegendVisible(false);
         chartResistance.setId("chartResistance");
         chartResistance.setAnimated(true);
-        chartResistance.setTitle("Resistencia LM35");
+//        chartResistance.setTitle("Resistencia LM35");
+        chartResistance.setTitle("Resistencia");
         chartResistance.setHorizontalGridLinesVisible(true);
         seriesResistance.setName("Resistencia");
         chartResistance.getData().add(seriesResistance);
@@ -158,7 +160,8 @@ public class Hyperterminal extends Application {
 //        chartTemperatureNTC.setLegendVisible(false);
         chartTemperatureNTC.setId("chartTemperatureNTC");
         chartTemperatureNTC.setAnimated(true);
-        chartTemperatureNTC.setTitle("Temperatura NTC");
+//        chartTemperatureNTC.setTitle("Temperatura NTC");
+        chartTemperatureNTC.setTitle("Temperatura");
         chartTemperatureNTC.setHorizontalGridLinesVisible(true);
         seriesTemperatureNTC.setName("Temperatura");
         chartTemperatureNTC.getData().add(seriesTemperatureNTC);
@@ -184,16 +187,16 @@ public class Hyperterminal extends Application {
         root.add(tfKeyPressed, 1, 2, 1, 1);
 
         // alignment
-        root.setHalignment(lbTemperature, CENTER);
-        root.setHalignment(lbResistance, CENTER);
-        root.setHalignment(lbTemperatureNTC, CENTER);
-        root.setHalignment(tfCalibrateNTC, CENTER);
+        GridPane.setHalignment(lbTemperature, CENTER);
+        GridPane.setHalignment(lbResistance, CENTER);
+        GridPane.setHalignment(lbTemperatureNTC, CENTER);
+        GridPane.setHalignment(tfCalibrateNTC, CENTER);
 
         // CSS and show
         Scene scene = new Scene(root, 800, 450);
-        File f = new File("resources/stylesheet.css");
+        File file = new File("resources/stylesheet.css");
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        scene.getStylesheets().add("file:///" + file.getAbsolutePath().replace("\\", "/"));
         primaryStage.setScene(scene);
     }
 
@@ -207,13 +210,10 @@ public class Hyperterminal extends Application {
             System.exit(0);
         });
 
-        executor = Executors.newCachedThreadPool(new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread thread = new Thread(r);
-                thread.setDaemon(true);
-                return thread;
-            }
+        executor = Executors.newCachedThreadPool(r -> {
+            Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
         });
 
         AddToQueue addToQueue = new AddToQueue();
@@ -228,78 +228,79 @@ public class Hyperterminal extends Application {
                 try {
                     String mReceivedData = serialPortCommunication.getData();
                     if (!"".equals(mReceivedData) && mReceivedData != null) {
+
                         String[] arrReceivedData = mReceivedData.split(",");
                         try {
                             String mTypeData = arrReceivedData[0];
                             int mValueData = Integer.parseInt(arrReceivedData[1]);
-                            System.out.println(mTypeData + "," + mValueData);
 
                             switch (mTypeData) {
+
                                 case "temp_LM35":
                                     dataTemperature.add(mValueData);
-                                    Platform.runLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            lbTemperature.setText(mValueData + " °C");
-                                        }
-                                    });
+                                    Platform.runLater(() -> lbTemperature.setText(mValueData + " °C"));
                                     break;
 
-                                case "res_LM35":
+                                case "res_NTC":
                                     dataResistance.add(mValueData);
-                                    Platform.runLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            lbResistance.setText(mValueData + " Ω");
-                                        }
-                                    });
+                                    Platform.runLater(() -> lbResistance.setText(mValueData + " Ω"));
                                     break;
 
                                 case "temp_NTC":
                                     dataTemperatureNTC.add(mValueData);
-                                    Platform.runLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            lbTemperatureNTC.setText(mValueData + " °C");
-                                        }
-                                    });
+                                    Platform.runLater(() -> lbTemperatureNTC.setText(mValueData + " °C"));
+                                    break;
+
+                                case "numberEntered":
+                                    System.out.println("String.valueOf(mValueData)" + String.valueOf(mValueData));
+                                    Platform.runLater(() -> tfCalibrateNTC.setText(String.valueOf(mValueData)));
                                     break;
 
                                 case "key":
-                                    Platform.runLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-//                                            lbKeyPressed.setText(lbKeyPressed.getText() + mValueData);
-                                            tfKeyPressed.appendText(String.valueOf(mValueData));
-                                        }
-                                    });
+                                    Platform.runLater(() -> tfKeyPressed.appendText(String.valueOf(mValueData)));
                                     break;
+
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println("Error: " + e.getLocalizedMessage());
+//                            System.out.println("Error: " + e.getLocalizedMessage());
                         }
 
                     }
                 } catch (NumberFormatException | NullPointerException e) {
-                    System.out.println("Error: " + e.getLocalizedMessage());
+                    System.out.println("Error: " + e.getMessage());
                 }
 
                 //send data
                 tfCalibrateNTC.setOnKeyReleased(event -> {
                     if (event.getCode() == KeyCode.ENTER) {
                         try {
-//                            outputStream = serialPortCommunication.serialPort.getOutputStream();
-//                            int calibrate = Integer.parseInt(tfCalibrateNTC.getText());
-//                            outputStream.write(calibrate);
-//                            System.out.println("calibrate " + calibrate);
-//                            outputStream.close();
                             outputStream = serialPortCommunication.serialPort.getOutputStream();
                             String messageString = tfCalibrateNTC.getText();
-                            outputStream.write(messageString.getBytes());
-                            System.out.println(messageString);
-                            outputStream.close();
+
+                            try {
+                                int n = Integer.parseInt(messageString);
+
+                                if (n >= -55 && n <= 150) {
+                                    outputStream.write(messageString.getBytes());
+                                    System.out.println(messageString);
+                                    outputStream.close();
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Error: no es un número");
+                            }
+
+//                            if (messageString.matches("^[+-]?\\d+$")   //"\\d+"
+//                                    && Integer.parseInt(messageString) >= -55
+//                                    && Integer.parseInt(messageString) <= 150) {
+//                                outputStream.write(messageString.getBytes());
+//                                System.out.println(messageString);
+//                                outputStream.close();
+//                            } else {
+//                                System.out.println("Error: no es un número");
+//                            }
+
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("Error: " + e.getMessage());
                         }
                     }
                 });
@@ -319,10 +320,10 @@ public class Hyperterminal extends Application {
 //                    }
 //                });
 
-                Thread.sleep(100);
+                Thread.sleep(1);
                 executor.execute(this);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            } catch (InterruptedException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
     }

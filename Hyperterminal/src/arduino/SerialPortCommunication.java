@@ -30,9 +30,9 @@ public class SerialPortCommunication {
     private BufferedReader input;
     private OutputStream output;
     //Milliseconds to block while waiting for port open
-    public static final int TIME_OUT = 1000;
+    private static final int TIME_OUT = 1000;
     //Default bits per second for COM port.
-    public static final int DATA_RATE = 9600;
+    private static final int DATA_RATE = 9600;
 
     public void initialize() {
         CommPortIdentifier portId = null;
@@ -47,14 +47,15 @@ public class SerialPortCommunication {
                 }
             }
         }
+
         if (portId == null) {
             System.out.println("Could not find COM port.");
             return;
         }
+
         try {
             // open serial port, and use class name for the appName.
-            serialPort = (SerialPort) portId.open(this.getClass().getName(),
-                    TIME_OUT);
+            serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
             // set port parameters
             serialPort.setSerialPortParams(DATA_RATE,
                     SerialPort.DATABITS_8,
@@ -64,7 +65,7 @@ public class SerialPortCommunication {
             input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
             output = serialPort.getOutputStream();
         } catch (Exception e) {
-            System.err.println(e.toString());
+            System.out.println("Error: " + e.toString());
         }
     }
 

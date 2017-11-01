@@ -80,6 +80,9 @@ double rightColPositionX = center + fromCenter;
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+//EEPROM
+#include <EEPROM.h>
+
 //LM35
 #define pinLM35   A8
 
@@ -87,65 +90,84 @@ double rightColPositionX = center + fromCenter;
 #define pinNTC    A9
 #define R1        10e3
 #define R0        10e3 // resistencia de 10k
-//#define T0        25 //temperatura ambiente
+
+#define T0_EEPROM  0    //EEPROM address
+#define B_EEPROM   1
 
 uint16_t i;
-uint16_t T0;
+uint16_t T0;          //temperatura ambiente
+uint16_t B;           //constante de calibración
+String numberEntered;
 
 void setup() {
   Serial.begin(9600);
+
   i = 0;
-  T0 = 0;  //temperatura ambiente
+  T0 = EEPROM.read(T0_EEPROM);  //temperatura ambiente
+  B = 20;   //constante de calibración
+
+  //EEPROM.write(ADDRESS,VALUE);
+  //EEPROM.update(T0_EEPROM, T0);
+  EEPROM.update(B_EEPROM, B);
 
   tft.reset();
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
-
   //Background color
   tft.fillScreen(LIGHTGREY);
-
+  //Colors
   createButtons();
   insertNumbers();
-  //Serial.println(F("Press any button on the TFT screen: "));
-  Serial.println(F(""));
+  Serial.println(F("Presiona una tecla: "));
 }
 
 void loop() {
-  if (i >= 1000) {
+  if (i >= 500) {
     temperatureLM35();
     temperatureNTC();
     calibrateNTC();
     i = 0;
   }
   i++;
- 
 
   runKeypad();
 }
 
 void calibrateNTC() {
-    if (Serial.available() > 0) {
+  if (Serial.available() > 0) {
+    uint16_t T0_read = Serial.parseInt();
 
-      T0 = Serial.parseInt();
+    Serial.print("T0_read,");
+    Serial.print(T0_read);
+    Serial.println("");
 
+    if (T0_read <= 155 && T0_read >= -55) {
+      T0 = T0_read;
       Serial.print("calibrateNTC,");
       Serial.print(T0);
       Serial.println("");
     }
-  
+  }
+}
+
+void temperatureLM35() {
+  float volt, res, temp;
+
+  volt = analogRead(pinLM35);
+  res = (volt / 1024.0) * 500;
+  temp = (volt * 500) / 10230;
+
+  Serial.print("temp_LM35");
+  Serial.print(",");
+  Serial.print((int) temp);
+  Serial.println();
 }
 
 void temperatureNTC() {
-  float volts, T, RT, AT = 0, B = 20, R;
+  float volts, T, RT, AT = 0, R;
+  T0 = EEPROM.read(T0_EEPROM);
+  B = EEPROM.read(B_EEPROM);
 
-  /*
-    static uint16_t tiempo = 0;
-    tiempo = millis() - AT; //cada ms incrementa en uno
-    if (tiempo >= 1000 | AT == 0) {
-      AT = millis();
-      volts = analogRead(pinNTC) * 0.0048828125;
-    }
-  */
   volts = analogRead(pinNTC) * 0.0048828125;
   RT = R1 * volts / (5 - volts);
   T = T0 - B * log(RT / R0); //si rt es menor a r0 la temperatura sube, resultado negativo
@@ -155,22 +177,9 @@ void temperatureNTC() {
   Serial.print(",");
   Serial.print((int)(T));
   Serial.println();
-}
-
-void temperatureLM35() {
-  float volt, res, temp;
-
-  volt = analogRead(pinLM35);
-  res = (volt / 1024.0) * 5000;
-  temp = (volt * 500) / 10230;
-
-  Serial.print("temp_LM35");
+  Serial.print("res_NTC");
   Serial.print(",");
-  Serial.print((int) temp);
-  Serial.println();
-  Serial.print("res_LM35");
-  Serial.print(",");
-  Serial.print((int) res);
+  Serial.print((int) R);
   Serial.println();
 }
 
@@ -188,21 +197,25 @@ void runKeypad() {
       if (Y > verticalAlign) {
         if (Y < boxHeightRow1) {
           Serial.println("key,1");
+          numberEntered = numberEntered + "1";
           delay(150);
         }
         //Check if element clicked is in row 2
         else if (Y < boxHeightRow2) {
           Serial.println("key,4");
+          numberEntered = numberEntered + "4";
           delay(150);
         }
         //Check if element clicked is in row 3
         else if (Y < boxHeightRow3) {
           Serial.println("key,7");
+          numberEntered = numberEntered + "7";
           delay(150);
         }
         //Check if element clicked is in row 4
         else if (Y < boxHeightRow4) {
           Serial.println("key,0");
+          numberEntered = numberEntered + "0";
           delay(150);
         }
       }
@@ -212,21 +225,25 @@ void runKeypad() {
       if (Y > verticalAlign) {
         if (Y < boxHeightRow1) {
           Serial.println("key,2");
+          numberEntered = numberEntered + "2";
           delay(150);
         }
         //Check if element clicked is in row 2
         else if (Y < boxHeightRow2) {
           Serial.println("key,5");
+          numberEntered = numberEntered + "5";
           delay(150);
         }
         //Check if element clicked is in row 3
         else if (Y < boxHeightRow3) {
           Serial.println("key,8");
+          numberEntered = numberEntered + "8";
           delay(150);
         }
         //Check if element clicked is in row 4
         else if (Y < boxHeightRow4) {
           Serial.println("key,0");
+          numberEntered = numberEntered + "0";
           delay(150);
         }
       }
@@ -236,21 +253,41 @@ void runKeypad() {
         //Check if element clicked is in row 1
         if (Y < boxHeightRow1) {
           Serial.println("key,3");
+          numberEntered = numberEntered + "3";
           delay(150);
         }
         //Check if element clicked is in row 2
         else if (Y < boxHeightRow2) {
           Serial.println("key,6");
+          numberEntered = numberEntered + "6";
           delay(150);
         }
         //Check if element clicked is in row 3
         else if (Y < boxHeightRow3) {
-          Serial.println("key,9");
+          //Serial.println("key,9");
+          numberEntered = numberEntered + "9";
           delay(150);
         }
         //Check if element clicked is in row 3
         else if (Y < boxHeightRow4) {
-          Serial.println("key,.");
+          //Serial.println("key,.");
+
+          if (numberEntered == "") {
+            EEPROM.update(T0_EEPROM, 11);
+          } else {
+            T0 = numberEntered.toInt();
+            if (T0 <= 155) {
+              EEPROM.update(T0_EEPROM, T0);
+              Serial.print("numberEntered,");
+              Serial.print(T0);
+              Serial.println("");
+              numberEntered = "";
+            } else {
+              Serial.print("numberEntered,error");
+              Serial.println("");
+              numberEntered = "";
+            }
+          }
           delay(150);
         }
       }
@@ -259,7 +296,6 @@ void runKeypad() {
 }
 
 void retrieveTouch() {
-
   digitalWrite(13, HIGH);
   TSPoint p = ts.getPoint();
   digitalWrite(13, LOW);
@@ -376,12 +412,10 @@ void insertNumbers() {
   tft.println("0");
 
   //Insert Period Character
+  //tft.setCursor(rightColCursorX, fourthRowCursorY);
+  //tft.println(".");
+
+  //Enter
   tft.setCursor(rightColCursorX, fourthRowCursorY);
-  tft.println(".");
+  tft.println("->");
 }
-
-
-
-
-
-
