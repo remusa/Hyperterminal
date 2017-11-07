@@ -1,63 +1,61 @@
+#include <TouchScreen.h>
 #include <Elegoo_GFX.h>    // Core graphics library
 #include <Elegoo_TFTLCD.h> // Hardware-specific library
-#include <TouchScreen.h>
 
-#if defined(__SAM3X8E__)
-#undef __FlashStringHelper::F(string_literal)
-#define F(string_literal) string_literal
-#endif
-
-#include <Adafruit_GFX.h>
-#include <TouchScreen.h>
-
-#define YP A3  // must be an analog pin, use "An" notation!
-#define XM A2  // must be an analog pin, use "An" notation!
-#define YM 9   // can be a digital pin
-#define XP 8   // can be a digital pin
-
-#define TS_MINX 120
-#define TS_MAXX 900
-#define TS_MINY 70
-#define TS_MAXY 920
+#define YP          A3  // must be an analog pin, use "An" notation!
+#define XM          A2  // must be an analog pin, use "An" notation!
+#define YM          9   // can be a digital pin
+#define XP          8   // can be a digital pin
 
 //SPI Communication
-#define LCD_CS A3
-#define LCD_CD A2
-#define LCD_WR A1
-#define LCD_RD A0
-// optional
-#define LCD_RESET A4
+#define LCD_CS      A3
+#define LCD_CD      A2
+#define LCD_WR      A1
+#define LCD_RD      A0
+#define LCD_RESET   A4  // optional
+
+#define TS_MINX   205
+#define TS_MINY   887
+#define TS_MAXX   904
+#define TS_MAXY   271
 
 //Color Definitons
 #define BLACK     0x0000
-#define BLUE      0x001F
+#define WHITE     0xFFFF
 #define GREY      0xCE79
 #define LIGHTGREY 0xDEDB
-#define MINPRESSURE 1
+#define BLUE      0x001F
+#define RED       0xF800
+#define GREEN     0x07E0
+#define CYAN      0x07FF
+#define MAGENTA   0xF81F
+#define YELLOW    0xFFE0
+
+//Pressure
+#define MINPRESSURE 10
 #define MAXPRESSURE 1000
 
 // For better pressure precision, we need to know the resistance
 // between X+ and X- Use any multimeter to read it
 // For the one we're using, its 300 ohms across the X plate
 // Pins A2-A6
-TouchScreen ts = TouchScreen(XP, YP, XM, YM, 364);
+TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300); //364
 
-//Size of key containers 70px
-#define BOXSIZE 70
+Elegoo_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+
+///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+//Size of key containers
+#define BOXSIZE 40
 
 //2.4 = 240 x 320
 //Height 319 to fit on screen
 
-Elegoo_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
-//Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
-
-//Container variables for touch coordinates
-int X, Y, Z;
-
 //Screen height without hidden pixel
 double tHeight = tft.height() - 1;
 //Centering the mid square
-double center = (tft.width() / 2) - (BOXSIZE / 2);
+double center = (tft.width() / 2) + (BOXSIZE / 2);  //(tft.width() / 2) - (BOXSIZE / 2)
 //Space between squares
 double padding = 10;
 //Position of squares to the left and right of center
@@ -69,13 +67,29 @@ double thirdRow = secondRow + BOXSIZE + padding;
 //Fourth row Y-Axis position
 double fourthRow = thirdRow + BOXSIZE + padding;
 //Y-Axis align for all squares
-double verticalAlign = (tHeight - ((BOXSIZE * 4) + (padding * 3))) / 2;
+double verticalAlign = 35; //(tHeight - ((BOXSIZE * 4) + (padding * 3))) / 2
 //Left column starting x posision
 double leftColPositionX = center - fromCenter;
 //Mid column starting x posision
 double midColPositionX = center;
 //Right column starting x posision
 double rightColPositionX = center + fromCenter;
+
+// Key values
+#define row1MIN   64
+#define row1MAX   105
+#define row2MIN   121
+#define row2MAX   169
+#define row3MIN   184
+#define row3MAX   232
+#define row4MIN   248
+#define row4MAX   290
+#define col1MIN   102
+#define col1MAX   177
+#define col2MIN   204
+#define col2MAX   272
+#define col3MIN   296
+#define col3MAX   365
 
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -88,334 +102,302 @@ double rightColPositionX = center + fromCenter;
 
 //NTC
 #define pinNTC    A9
-#define R1        10e3
-#define R0        10e3 // resistencia de 10k
+#define NTC_R1    10e3  // 10k ohms
+#define NTC_R0    10e3
 
-#define T0_EEPROM  0    //EEPROM address
-#define B_EEPROM   1
+//EEPROM
+#define T0_EEPROM  0    //temp ambiente           -> EEPROM address
+#define B_EEPROM   1    //constante calibración   -> EEPROM address
 
-uint16_t i;
-uint16_t T0;          //temperatura ambiente
-uint16_t B;           //constante de calibración
+uint16_t i;           //contador para lecturas
+uint16_t NTC_T0;      //temperatura ambiente NTC
+uint16_t NTC_B;       //constante de calibración NTC
 String numberEntered;
+
+int menu;        //menu number -> 0=Main, 1=LM35, 2=NTC, 99=keyboard
+int menuBack;
+
+float LM35_volt, LM35_res, LM35_temp;
+float NTC_volts, NTC_T, NTC_RT, NTC_AT = 0, NTC_R;
+
+String variableCalibration;
 
 void setup() {
   Serial.begin(9600);
 
+  pinMode(3, OUTPUT);
+
   i = 0;
-  T0 = EEPROM.read(T0_EEPROM);  //temperatura ambiente
-  B = 20;   //constante de calibración
+  NTC_T0 = EEPROM.read(T0_EEPROM);
+  NTC_B = EEPROM.read(B_EEPROM);
 
+  ///////////////////////
+  ///     EEPROM      ///
+  ///////////////////////
   //EEPROM.write(ADDRESS,VALUE);
-  //EEPROM.update(T0_EEPROM, T0);
-  EEPROM.update(B_EEPROM, B);
+  //EEPROM.update(T0_EEPROM, NTC_T0);
+  //EEPROM.update(B_EEPROM, NTC_B);
 
+  Serial.print("eeprom_NTC_T0,");
+  Serial.println(NTC_T0);
+  Serial.print("eeprom_NTC_B,");
+  Serial.println(NTC_B);
+
+  ///////////////////////
+  ///     TFT         ///
+  ///////////////////////
   tft.reset();
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
-  //Background color
-  tft.fillScreen(LIGHTGREY);
-  //Colors
-  createButtons();
-  insertNumbers();
-  Serial.println(F("Presiona una tecla: "));
+  tft.fillScreen(WHITE);              //Background color
+  tft.setRotation(3);                 //(0, 1, 2, 3) -> (0, 90, 180, 270)
+
+  ///////////////////////
+  ///     MENU        ///
+  ///////////////////////
+  menu = 0;
+  menuMain();
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
-  if (i >= 500) {
-    temperatureLM35();
-    temperatureNTC();
-    calibrateNTC();
-    i = 0;
-  }
-  i++;
+  ///////////////////////
+  ///     MENU        ///
+  ///////////////////////
+  getPressed();
 
-  runKeypad();
+  ///////////////////////
+  ///     SENSORS     ///
+  ///////////////////////
+  getSensors();
 }
 
-void calibrateNTC() {
-  if (Serial.available() > 0) {
-    uint16_t T0_read = Serial.parseInt();
-
-    Serial.print("T0_read,");
-    Serial.print(T0_read);
-    Serial.println("");
-
-    if (T0_read <= 155 && T0_read >= -55) {
-      T0 = T0_read;
-      Serial.print("calibrateNTC,");
-      Serial.print(T0);
-      Serial.println("");
-    }
-  }
-}
-
-void temperatureLM35() {
-  float volt, res, temp;
-
-  volt = analogRead(pinLM35);
-  res = (volt / 1024.0) * 500;
-  temp = (volt * 500) / 10230;
-
-  Serial.print("temp_LM35");
-  Serial.print(",");
-  Serial.print((int) temp);
-  Serial.println();
-}
-
-void temperatureNTC() {
-  float volts, T, RT, AT = 0, R;
-  T0 = EEPROM.read(T0_EEPROM);
-  B = EEPROM.read(B_EEPROM);
-
-  volts = analogRead(pinNTC) * 0.0048828125;
-  RT = R1 * volts / (5 - volts);
-  T = T0 - B * log(RT / R0); //si rt es menor a r0 la temperatura sube, resultado negativo
-  R = R0 * (log(B * ((1 / T) - (1 / T0))));
-
-  Serial.print("temp_NTC");
-  Serial.print(",");
-  Serial.print((int)(T));
-  Serial.println();
-  Serial.print("res_NTC");
-  Serial.print(",");
-  Serial.print((int) R);
-  Serial.println();
-}
-
-void runKeypad() {
-  retrieveTouch();
-  int boxHeightRow1 = verticalAlign + BOXSIZE;
-  int boxHeightRow2 = secondRow + BOXSIZE;
-  int boxHeightRow3 = thirdRow + BOXSIZE;
-  int boxHeightRow4 = fourthRow + BOXSIZE;
-
-  if (Z > MINPRESSURE && Z < MAXPRESSURE) {
-    //Check if element clicked is in left column
-    if (X > leftColPositionX && X < (leftColPositionX + BOXSIZE)) {
-      //Check if element clicked is in row 1
-      if (Y > verticalAlign) {
-        if (Y < boxHeightRow1) {
-          Serial.println("key,1");
-          numberEntered = numberEntered + "1";
-          delay(150);
-        }
-        //Check if element clicked is in row 2
-        else if (Y < boxHeightRow2) {
-          Serial.println("key,4");
-          numberEntered = numberEntered + "4";
-          delay(150);
-        }
-        //Check if element clicked is in row 3
-        else if (Y < boxHeightRow3) {
-          Serial.println("key,7");
-          numberEntered = numberEntered + "7";
-          delay(150);
-        }
-        //Check if element clicked is in row 4
-        else if (Y < boxHeightRow4) {
-          Serial.println("key,0");
-          numberEntered = numberEntered + "0";
-          delay(150);
-        }
-      }
-      //Check if element clicked is in mid column
-    } else if (X > midColPositionX && X < (midColPositionX + BOXSIZE)) {
-      //Check if element clicked is in row 1
-      if (Y > verticalAlign) {
-        if (Y < boxHeightRow1) {
-          Serial.println("key,2");
-          numberEntered = numberEntered + "2";
-          delay(150);
-        }
-        //Check if element clicked is in row 2
-        else if (Y < boxHeightRow2) {
-          Serial.println("key,5");
-          numberEntered = numberEntered + "5";
-          delay(150);
-        }
-        //Check if element clicked is in row 3
-        else if (Y < boxHeightRow3) {
-          Serial.println("key,8");
-          numberEntered = numberEntered + "8";
-          delay(150);
-        }
-        //Check if element clicked is in row 4
-        else if (Y < boxHeightRow4) {
-          Serial.println("key,0");
-          numberEntered = numberEntered + "0";
-          delay(150);
-        }
-      }
-      //Check if element clicked is in third column
-    } else if (X > rightColPositionX && X < (rightColPositionX + BOXSIZE)) {
-      if (Y > verticalAlign) {
-        //Check if element clicked is in row 1
-        if (Y < boxHeightRow1) {
-          Serial.println("key,3");
-          numberEntered = numberEntered + "3";
-          delay(150);
-        }
-        //Check if element clicked is in row 2
-        else if (Y < boxHeightRow2) {
-          Serial.println("key,6");
-          numberEntered = numberEntered + "6";
-          delay(150);
-        }
-        //Check if element clicked is in row 3
-        else if (Y < boxHeightRow3) {
-          //Serial.println("key,9");
-          numberEntered = numberEntered + "9";
-          delay(150);
-        }
-        //Check if element clicked is in row 3
-        else if (Y < boxHeightRow4) {
-          //Serial.println("key,.");
-
-          if (numberEntered == "") {
-            EEPROM.update(T0_EEPROM, 11);
-          } else {
-            T0 = numberEntered.toInt();
-            if (T0 <= 155) {
-              EEPROM.update(T0_EEPROM, T0);
-              Serial.print("numberEntered,");
-              Serial.print(T0);
-              Serial.println("");
-              numberEntered = "";
-            } else {
-              Serial.print("numberEntered,error");
-              Serial.println("");
-              numberEntered = "";
-            }
-          }
-          delay(150);
-        }
-      }
-    }
-  }
-}
-
-void retrieveTouch() {
+void getPressed() {
   digitalWrite(13, HIGH);
   TSPoint p = ts.getPoint();
   digitalWrite(13, LOW);
 
-  //If sharing pins, you'll need to fix the directions of the touchscreen pins
   pinMode(XM, OUTPUT);
   pinMode(YP, OUTPUT);
 
-  //Scale from 0->1023 to tft.width
-  X = map(p.x, TS_MAXX, TS_MINX, 0, tft.width());
-  Y = map(p.y, TS_MAXY, TS_MINY, 0, tft.height());
-  Z = p.z;
+  if (p.z > MINPRESSURE && p.z < MAXPRESSURE) { //if correct pressure
+    // turn from 0->1023 to tft.width
+    p.x = map(p.x, TS_MAXX, TS_MINX, 0, 320);
+    p.y = map(p.y, TS_MAXY, TS_MINY, 0, 480);
+
+    /*Serial.print("p.y:"); // this code will help you get the y and x numbers for the touchscreen
+      Serial.print(p.y);
+      Serial.print(" ");
+      Serial.print("p.x:");
+      Serial.println(p.x);*/
+
+    ///////////////////////
+    ///     MAIN        ///
+    ///////////////////////
+    if (menu == 0) {
+      //BUTTON LM35
+      if (p.y >= 30 && p.y <= 420 && p.x >= 92 && p.x <= 133) {
+        //Serial.println("BUTTON LM35");
+        menuLM35();
+      }
+      //BUTTON NTC
+      if (p.y >= 30 && p.y <= 420 && p.x >= 150 && p.x <= 200) {
+        //Serial.println("BUTTON NTC");
+        menuNTC();
+      }
+    }
+
+    ///////////////////////
+    ///     LM35        ///
+    ///////////////////////
+    if (menu == 1) {
+      menuBack = 1;
+
+      //RELOAD VALUES
+      if (p.y >= 30 && p.y <= 420 && p.x >= 185 && p.x <= 235) {
+        //Serial.println("BUTTON RELOAD");
+        menuLM35();
+      }
+
+      //BUTTON MAIN MENU
+      if (p.y >= 30 && p.y <= 420 && p.x >= 248 && p.x <= 285) {
+        //Serial.println("BUTTON MAIN");
+        menuMain();
+      }
+    }
+
+    ///////////////////////
+    ///     NTC         ///
+    ///////////////////////
+    if (menu == 2) {
+      menuBack = 2;
+
+      //RELOAD VALUES
+      if (p.y >= 30 && p.y <= 420 && p.x >= 185 && p.x <= 235) {
+        //Serial.println("BUTTON RELOAD");
+        menuNTC();
+      }
+
+      //BUTTON CALIBRATE T0
+      if (p.y >= 320 && p.y <= 380 && p.x >= 50 && p.x <= 83) {
+        //Serial.println("BUTTON CALIBRATE T0");
+        variableCalibration = "NTC_T0";
+        menuKeypad();
+      }
+
+      //BUTTON CALIBRATE B
+      if (p.y >= 320 && p.y <= 380 && p.x >= 100 && p.x <= 135) {
+        //Serial.println("BUTTON CALIBRATE B");
+        variableCalibration = "NTC_B";
+        menuKeypad();
+      }
+
+      //BUTTON MAIN MENU
+      if (p.y >= 30 && p.y <= 420 && p.x >= 248 && p.x <= 285) {
+        //Serial.println("BUTTON MAIN");
+        menuMain();
+      }
+    }
+
+    ///////////////////////
+    ///     KEYPAD      ///
+    ///////////////////////
+    if (menu == 99) {
+
+      delay(150);
+
+      //ROW1
+      if (p.x >= row1MIN && p.x <= row1MAX) {
+        //COL1
+        if (p.y >= col1MIN && p.y <= col1MAX) {
+          Serial.println("key,1");
+          numberEntered = numberEntered + "1";
+          delay(150);
+        }
+        //COL2
+        else if (p.y >= col2MIN && p.y <= col2MAX) {
+          Serial.println("key,2");
+          numberEntered = numberEntered + "2";
+          delay(150);
+        }
+        //COL3
+        else if (p.y >= col3MIN && p.y <= col3MAX) {
+          Serial.println("key,3");
+          numberEntered = numberEntered + "3";
+          delay(150);
+        }
+      }
+
+      //ROW2
+      else if (p.x >= row2MIN && p.x <= row2MAX) {
+        //COL1
+        if (p.y >= col1MIN && p.y <= col1MAX) {
+          Serial.println("key,4");
+          numberEntered = numberEntered + "4";
+          delay(150);
+        }
+        //COL2
+        else if (p.y >= col2MIN && p.y <= col2MAX) {
+          Serial.println("key,5");
+          numberEntered = numberEntered + "5";
+          delay(150);
+        }
+        //COL3
+        else if (p.y >= col3MIN && p.y <= col3MAX) {
+          Serial.println("key,6");
+          numberEntered = numberEntered + "6";
+          delay(150);
+        }
+      }
+
+      //ROW3
+      else if (p.x >= row3MIN && p.x <= row3MAX) {
+        //COL1
+        if (p.y >= col1MIN && p.y <= col1MAX) {
+          Serial.println("key,7");
+          numberEntered = numberEntered + "7";
+          delay(150);
+        }
+        //COL2
+        else if (p.y >= col2MIN && p.y <= col2MAX) {
+          Serial.println("key,8");
+          numberEntered = numberEntered + "8";
+          delay(150);
+        }
+        //COL3
+        else if (p.y >= col3MIN && p.y <= col3MAX) {
+          Serial.println("key,9");
+          numberEntered = numberEntered + "9";
+          delay(150);
+        }
+      }
+
+      //ROW4
+      else if (p.x >= row4MIN && p.x <= row4MAX) {
+        //COL1
+        if (p.y >= col1MIN && p.y <= col1MAX) {
+          Serial.println("key,0");
+          numberEntered = numberEntered + "0";
+          delay(150);
+        }
+        //COL2
+        else if (p.y >= col2MIN && p.y <= col2MAX) {
+          Serial.println("key,<-");
+          if (numberEntered == "") {
+            Serial.println("null");
+          } else {
+            numberEntered.remove(numberEntered.length() - 1, 1);
+          }
+          delay(150);
+        }
+        //COL3
+        else if (p.y >= col3MIN && p.y <= col3MAX) {
+          if (numberEntered == "") {
+            Serial.println("null");
+          } else {
+            int updatedValue = numberEntered.toInt();
+            /*Serial.print("numberEntered,");
+              Serial.print(updatedValue);
+              Serial.println("");*/
+
+            //CALIBRATE NTC T0
+            if (variableCalibration == "NTC_T0") {
+              if (updatedValue <= 155) {
+                EEPROM.update(T0_EEPROM, updatedValue);
+                NTC_T0 = updatedValue;
+                Serial.print("eeprom_NTC_T0,");
+                Serial.println(updatedValue);
+              } else {
+                Serial.println("numberEntered,errorUPDATE_NTC_T0");
+              }
+            }
+
+            //CALIBRATE NTC B
+            else if (variableCalibration == "NTC_B") {
+              if (updatedValue <= 50) {
+                EEPROM.update(B_EEPROM, updatedValue);
+                NTC_B = updatedValue;
+                Serial.print("eeprom_NTC_B,");
+                Serial.println(updatedValue);
+              } else {
+                Serial.println("numberEntered,errorUPDATE_NTC_B");
+              }
+            }
+
+            numberEntered = "";
+          }
+          delay(150);
+
+          switch (menuBack) {
+            case 2:
+              menuNTC();
+              break;
+          }
+        }
+
+      }
+
+    }
+  }
 }
 
-void createButtons() {
-  //(initial x,initial y,width,height,color)
-  double secondRowVertialAlign = secondRow + verticalAlign;
-  double thirdRowVertialAlign = thirdRow + verticalAlign;
-  double fourthRowVertialAlign = fourthRow + verticalAlign;
-
-  /***Draw filled squares with specified dimensions and position***/
-  //First Row
-  tft.fillRect(leftColPositionX, verticalAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(midColPositionX, verticalAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(rightColPositionX, verticalAlign, BOXSIZE, BOXSIZE, GREY);
-
-  //Second Row
-  tft.fillRect(leftColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(midColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(rightColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-
-  //Third Row
-  tft.fillRect(leftColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(midColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-  tft.fillRect(rightColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-
-  //Fourth Row
-  tft.fillRect(leftColPositionX, fourthRowVertialAlign, (BOXSIZE * 2) + padding, BOXSIZE, GREY);
-  tft.fillRect(rightColPositionX, fourthRowVertialAlign, BOXSIZE, BOXSIZE, GREY);
-
-  /***Draw Borders around squares***/
-  //First Row
-  tft.drawRect(leftColPositionX, verticalAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(midColPositionX, verticalAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(rightColPositionX, verticalAlign, BOXSIZE, BOXSIZE, BLACK);
-
-  //Second Row
-  tft.drawRect(leftColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(midColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(rightColPositionX, secondRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-
-  //Third Row
-  tft.drawRect(leftColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(midColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-  tft.drawRect(rightColPositionX, thirdRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-
-  //Fourth Row
-  tft.drawRect(leftColPositionX, fourthRowVertialAlign, (BOXSIZE * 2) + padding, BOXSIZE, BLACK);
-  tft.drawRect(rightColPositionX, fourthRowVertialAlign, BOXSIZE, BOXSIZE, BLACK);
-}
-
-void insertNumbers() {
-  //Centers text horizontally on all three columns
-  double leftColCursorX   = leftColPositionX + (BOXSIZE / 3);
-  double midColCursorX    = midColPositionX  + (BOXSIZE / 3);
-  double rightColCursorX  = rightColPositionX + (BOXSIZE / 3);
-  //Centers text horizontally on all four rows
-  double firstRowCursorY  = verticalAlign + (BOXSIZE / 3);
-  double secondRowCursorY = secondRow + firstRowCursorY;
-  double thirdRowCursorY  = thirdRow  + firstRowCursorY;
-  double fourthRowCursorY = fourthRow + firstRowCursorY;
-
-  tft.setTextSize(4);
-  tft.setTextColor(BLACK);
-
-  //Insert Number 1
-  tft.setCursor(leftColCursorX, firstRowCursorY);
-  tft.println("1");
-
-  //Insert Number 2
-  tft.setCursor(midColCursorX, firstRowCursorY);
-  tft.println("2");
-
-  //Insert Number 3
-  tft.setCursor(rightColCursorX, firstRowCursorY);
-  tft.println("3");
-
-  //Insert Number 4
-  tft.setCursor(leftColCursorX, secondRowCursorY);
-  tft.println("4");
-
-  //Insert Number 5
-  tft.setCursor(midColCursorX, secondRowCursorY);
-  tft.println("5");
-
-  //Insert Number 6
-  tft.setCursor(rightColCursorX, secondRowCursorY);
-  tft.println("6");
-
-  //Insert Number 7
-  tft.setCursor(leftColCursorX, thirdRowCursorY);
-  tft.println("7");
-
-  //Insert Number 8
-  tft.setCursor(midColCursorX, thirdRowCursorY);
-  tft.println("8");
-
-  //Insert Number 9
-  tft.setCursor(rightColCursorX, thirdRowCursorY);
-  tft.println("9");
-
-  //Insert Number 0
-  tft.setCursor(leftColPositionX + BOXSIZE, fourthRowCursorY);
-  tft.println("0");
-
-  //Insert Period Character
-  //tft.setCursor(rightColCursorX, fourthRowCursorY);
-  //tft.println(".");
-
-  //Enter
-  tft.setCursor(rightColCursorX, fourthRowCursorY);
-  tft.println("->");
-}

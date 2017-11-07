@@ -16,14 +16,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -46,6 +45,9 @@ public class Hyperterminal extends Application {
     //Keyboard key pressed
     private Label lbKeyPressed;
     private TextField tfKeyPressed;
+
+    //EEPROM values
+    private TextArea taEEPROM;
 
     //Calibrate NTC
     private TextField tfCalibrateNTC;
@@ -80,6 +82,10 @@ public class Hyperterminal extends Application {
         lbKeyPressed = new Label();
         lbKeyPressed.setText("Teclado: ");
         tfKeyPressed = new TextField("Teclado: \n");
+
+        // EEPROM
+        taEEPROM = new TextArea();
+        taEEPROM.appendText("EEPROM: \n");
 
         // calibrate NTC
         tfCalibrateNTC = new TextField("");
@@ -184,7 +190,8 @@ public class Hyperterminal extends Application {
         root.add(tfCalibrateNTC, 0, 4, 1, 1);
 
 //        root.add(lbKeyPressed, 1, 2, 1, 1);
-        root.add(tfKeyPressed, 1, 2, 1, 1);
+        root.add(taEEPROM, 1, 2, 1, 1);
+        root.add(tfKeyPressed, 1, 4, 1, 1);
 
         // alignment
         GridPane.setHalignment(lbTemperature, CENTER);
@@ -227,12 +234,14 @@ public class Hyperterminal extends Application {
             try {
                 try {
                     String mReceivedData = serialPortCommunication.getData();
+
                     if (!"".equals(mReceivedData) && mReceivedData != null) {
 
                         String[] arrReceivedData = mReceivedData.split(",");
                         try {
                             String mTypeData = arrReceivedData[0];
-                            int mValueData = Integer.parseInt(arrReceivedData[1]);
+                            String mValueDataS = arrReceivedData[1];
+                            int mValueData = Integer.parseInt(mValueDataS);
 
                             switch (mTypeData) {
 
@@ -252,12 +261,30 @@ public class Hyperterminal extends Application {
                                     break;
 
                                 case "numberEntered":
-                                    System.out.println("String.valueOf(mValueData)" + String.valueOf(mValueData));
+                                    System.out.println("numberEntered: " + String.valueOf(mValueData));
                                     Platform.runLater(() -> tfCalibrateNTC.setText(String.valueOf(mValueData)));
                                     break;
 
                                 case "key":
-                                    Platform.runLater(() -> tfKeyPressed.appendText(String.valueOf(mValueData)));
+                                    if (mValueDataS.equals("<-")) {
+                                        try {
+                                            Platform.runLater(() -> tfKeyPressed.setText("" + tfKeyPressed.getText().substring(0, tfKeyPressed.getText().length() - 1)));
+                                        } catch (Exception e) {
+                                            System.out.println("Error: no values");
+                                        }
+                                    } else {
+                                        Platform.runLater(() -> tfKeyPressed.appendText(String.valueOf(mValueData)));
+                                    }
+                                    break;
+
+                                case "eeprom_NTC_T0":
+                                    System.out.println("eeprom_NTC_T0: " + String.valueOf(mValueData));
+                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_T0: " + String.valueOf(mValueData) + "\n"));
+                                    break;
+
+                                case "eeprom_NTC_B":
+                                    System.out.println("eeprom_NTC_B: " + String.valueOf(mValueData));
+                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_B: " + String.valueOf(mValueData) + "\n"));
                                     break;
 
                             }
@@ -271,7 +298,7 @@ public class Hyperterminal extends Application {
                 }
 
                 //send data
-                tfCalibrateNTC.setOnKeyReleased(event -> {
+                /*tfCalibrateNTC.setOnKeyReleased(event -> {
                     if (event.getCode() == KeyCode.ENTER) {
                         try {
                             outputStream = serialPortCommunication.serialPort.getOutputStream();
@@ -303,7 +330,7 @@ public class Hyperterminal extends Application {
                             System.out.println("Error: " + e.getMessage());
                         }
                     }
-                });
+                });*/
 
 //                tfCalibrateNTC.textProperty().addListener(new ChangeListener<String>() {
 //                    @Override

@@ -35,6 +35,7 @@ public class SerialPortCommunication {
     private static final int DATA_RATE = 9600;
 
     public void initialize() {
+
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
         //First, Find an instance of serial port as set in PORT_NAMES.
