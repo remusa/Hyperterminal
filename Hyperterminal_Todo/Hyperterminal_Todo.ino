@@ -97,39 +97,54 @@ double rightColPositionX = center + fromCenter;
 //EEPROM
 #include <EEPROM.h>
 
-//LM35
-#define pinLM35   A8
-
-//NTC
-#define pinNTC    A9
-#define NTC_R1    10e3  // 10k ohms
-#define NTC_R0    10e3
-
 //EEPROM
 #define T0_EEPROM  0    //temp ambiente           -> EEPROM address
 #define B_EEPROM   1    //constante calibración   -> EEPROM address
 
-uint16_t i;           //contador para lecturas
-uint16_t NTC_T0;      //temperatura ambiente NTC
-uint16_t NTC_B;       //constante de calibración NTC
+//LM35 (Temperature)
+#define pinLM35   A8
+float LM35_volt, LM35_res, LM35_temp;
+
+//NTC (Temperature)
+#define pinNTC    A9
+#define NTC_R1    10e3  // 10k ohms
+#define NTC_R0    10e3
+float NTC_volts, NTC_T, NTC_RT, NTC_AT = 0, NTC_R;
+uint16_t NTC_T0;        //temperatura ambiente NTC
+uint16_t NTC_B;         //constante de calibración NTC
+
+//Keyboard
 String numberEntered;
 
-int menu;        //menu number -> 0=Main, 1=LM35, 2=NTC, 99=keyboard
+uint16_t i;                 //read count
+int menu;                   //menu number -> 0=Main, 1=LM35, 2=NTC, 99=keyboard
 int menuBack;
-
-float LM35_volt, LM35_res, LM35_temp;
-float NTC_volts, NTC_T, NTC_RT, NTC_AT = 0, NTC_R;
-
 String variableCalibration;
+
+//PIR (Motion)
+#define pinPIR    30
+int motionPIRstate;
+
+//LDR (fotoresistance)
+#define pinLDR    A10
+int fotoresistance;
 
 void setup() {
   Serial.begin(9600);
-
+  analogReference(DEFAULT);
   pinMode(3, OUTPUT);
-
   i = 0;
+
+  //Read values from EEPROM
   NTC_T0 = EEPROM.read(T0_EEPROM);
   NTC_B = EEPROM.read(B_EEPROM);
+
+  //PIR
+  motionPIRstate = 0;
+  pinMode(pinPIR, INPUT);     // declare sensor as input
+
+  //LDR
+  fotoresistance = 0;
 
   ///////////////////////
   ///     EEPROM      ///
