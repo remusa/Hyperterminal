@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6446dcc-a521-4a1e-9b1b-371bb5cf1011" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/stylesheet.css" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/animationMotion.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/animationMotion2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/animationStopped.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/To do.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/stylesheet.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$1.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$2.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$3.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$3.class" />
@@ -25,13 +29,18 @@
       <file leaf-file-name="Hyperterminal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="227" column="5" lean-forward="true" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
+            <state relative-caret-position="253">
+              <caret line="390" column="37" lean-forward="true" selection-start-line="390" selection-start-column="37" selection-end-line="390" selection-end-column="37" />
               <folding>
-                <element signature="e#0#17129#0" expanded="true" />
+                <element signature="e#0#20746#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#8186#8202#0" expanded="true" />
                 <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+                <element signature="e#18308#18454#0" expanded="true" />
+                <element signature="e#18453#18454#0" expanded="true" />
                 <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+                <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+                <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -40,8 +49,8 @@
       <file leaf-file-name="To do.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/To do.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+            <state relative-caret-position="238">
+              <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -89,8 +98,8 @@
         <option value="$PROJECT_DIR$/resources/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/arduino/JSSC.java" />
         <option value="$PROJECT_DIR$/src/arduino/SerialPortCommunication.java" />
-        <option value="$PROJECT_DIR$/src/resources/stylesheet.css" />
         <option value="$PROJECT_DIR$/To do.txt" />
+        <option value="$PROJECT_DIR$/src/resources/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" />
       </list>
     </option>
@@ -108,8 +117,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="512" />
-    <option name="y" value="205" />
+    <option name="x" value="-8" />
+    <option name="y" value="22" />
     <option name="width" value="850" />
     <option name="height" value="559" />
   </component>
@@ -620,10 +629,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18003026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16641453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -650,10 +659,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18003026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16641453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -684,31 +693,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added TODO" />
-    <option name="LAST_COMMIT_MESSAGE" value="added TODO" />
+    <MESSAGE value="added TODO, added motion sensor animation, fixed CSS stylesheet, removed EEPROM text area" />
+    <option name="LAST_COMMIT_MESSAGE" value="added TODO, added motion sensor animation, fixed CSS stylesheet, removed EEPROM text area" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
-          <line>309</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
-          <line>288</line>
-          <properties />
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
-          <line>305</line>
-          <properties />
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="30" />
+      <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -722,10 +712,15 @@
         <state relative-caret-position="4930">
           <caret line="290" column="99" lean-forward="false" selection-start-line="290" selection-start-column="99" selection-end-line="290" selection-end-column="99" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -743,10 +738,15 @@
         <state relative-caret-position="4930">
           <caret line="290" column="99" lean-forward="true" selection-start-line="290" selection-start-column="99" selection-end-line="290" selection-end-column="99" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -764,10 +764,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -784,10 +789,15 @@
         <state relative-caret-position="4284">
           <caret line="279" column="51" lean-forward="false" selection-start-line="279" selection-start-column="38" selection-end-line="279" selection-end-column="51" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -804,10 +814,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -824,10 +839,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -845,10 +865,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -859,10 +884,15 @@
         <state relative-caret-position="3672">
           <caret line="247" column="0" lean-forward="false" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -880,10 +910,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -893,10 +928,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1011,28 +1051,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+        <state relative-caret-position="-397">
+          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/To do.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        <state relative-caret-position="238">
+          <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="227" column="5" lean-forward="true" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
+        <state relative-caret-position="253">
+          <caret line="390" column="37" lean-forward="true" selection-start-line="390" selection-start-column="37" selection-end-line="390" selection-end-column="37" />
           <folding>
-            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8186#8202#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="e#18308#18454#0" expanded="true" />
+            <element signature="e#18453#18454#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+            <marker date="1510640372161" expanded="false" signature="20712:20723" ph=" { " />
+            <marker date="1510640372161" expanded="false" signature="20736:20742" ph=" }" />
           </folding>
         </state>
       </provider>

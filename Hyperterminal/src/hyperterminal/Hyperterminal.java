@@ -28,8 +28,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static javafx.geometry.HPos.CENTER;
-
 /**
  * @author rms
  */
@@ -40,39 +38,56 @@ public class Hyperterminal extends Application {
 
     private ExecutorService executor;
 
-    private static final int MAX_DATA_POINTS = 50;
+    private static final int MAX_DATA_POINTS = 25;
 
-    //Keyboard key pressed
+    // Keyboard key pressed
     private Label lbKeyPressed;
     private TextField tfKeyPressed;
 
-    //Chart temperature LM35
+    // Chart temperature LM35
     private int xSeriesDataTemperature = 0;
     private Series<Number, Number> seriesTemperature = new Series<>();
     private ConcurrentLinkedQueue<Number> dataTemperature = new ConcurrentLinkedQueue<>();
-    private Label lbTemperature;
     private NumberAxis xAxisTemperature;
+    //    private Label lbTemperature;
 
-    //Chart resistance LM35
+    // Chart resistance LM35
     private int xSeriesDataResistance = 0;
     private Series<Number, Number> seriesResistance = new Series<>();
     private ConcurrentLinkedQueue<Number> dataResistance = new ConcurrentLinkedQueue<>();
-    private Label lbResistance;
     private NumberAxis xAxisResistance;
+    //    private Label lbResistance;
 
-    //Chart temperature NTC
+    // Chart temperature NTC
     private int xSeriesDataTemperatureNTC = 0;
     private Series<Number, Number> seriesTemperatureNTC = new Series<>();
     private ConcurrentLinkedQueue<Number> dataTemperatureNTC = new ConcurrentLinkedQueue<>();
-    private Label lbTemperatureNTC;
     private NumberAxis xAxisTemperatureNTC;
+    //    private Label lbTemperatureNTC;
 
-    //Animation motion sensor PIR
+    // Chart lumens LDR
+    private int xSeriesDataLumensLDR = 0;
+    private Series<Number, Number> seriesLumensLDR = new Series<>();
+    private ConcurrentLinkedQueue<Number> dataLumensLDR = new ConcurrentLinkedQueue<>();
+    private NumberAxis xAxisLumensLDR;
+    //    private Label lbLumensLDR;
+
+    // Animation motion sensor PIR
     private Label lbAnimation;
-    private Image iiAnimationMotion;
-    private Image iiAnimationStopped;
+    private Image imgAnimationMotion;
+    private Image imgAnimationStopped;
     private ImageView ivAnimation;
     private boolean mMotionDetected;
+
+    // Color LDR
+    private Label lbColor;
+    private Image imgColorWhite;
+    private Image imgColorBlack;
+    private Image imgColorBlue;
+    private Image imgColorRed;
+    private Image imgColorYellow;
+    private ImageView ivColor;
+    private String mLastColor;
 
     private void init(Stage primaryStage) {
         // serial port
@@ -85,8 +100,8 @@ public class Hyperterminal extends Application {
         tfKeyPressed = new TextField("Teclado: \n");
 
         // temperature LM35
-        lbTemperature = new Label();
-        lbTemperature.setText("0 °C");
+//        lbTemperature = new Label();
+//        lbTemperature.setText("0 °C");
         xAxisTemperature = new NumberAxis(0, MAX_DATA_POINTS, MAX_DATA_POINTS / 10);
         xAxisTemperature.setForceZeroInRange(false);
         xAxisTemperature.setAutoRanging(false);
@@ -103,7 +118,7 @@ public class Hyperterminal extends Application {
             }
         };
         chartTemperature.setId("chartTemperature");
-        chartTemperature.setAnimated(true);
+        chartTemperature.setAnimated(false);
 //        chartTemperature.setTitle("Temperatura LM35");
 //        chartTemperature.setLegendVisible(false);
         chartTemperature.setTitle("Temperatura");
@@ -112,8 +127,8 @@ public class Hyperterminal extends Application {
         chartTemperature.getData().add(seriesTemperature);
 
         // resistance LM35
-        lbResistance = new Label();
-        lbResistance.setText("0 Ω");
+//        lbResistance = new Label();
+//        lbResistance.setText("0 Ω");
         xAxisResistance = new NumberAxis(0, MAX_DATA_POINTS, MAX_DATA_POINTS / 10);
         xAxisResistance.setForceZeroInRange(false);
         xAxisResistance.setAutoRanging(false);
@@ -130,7 +145,7 @@ public class Hyperterminal extends Application {
             }
         };
         chartResistance.setId("chartResistance");
-        chartResistance.setAnimated(true);
+        chartResistance.setAnimated(false);
 //        chartResistance.setTitle("Resistencia LM35");
 //        chartResistance.setLegendVisible(false);
         chartResistance.setTitle("Resistencia");
@@ -139,8 +154,8 @@ public class Hyperterminal extends Application {
         chartResistance.getData().add(seriesResistance);
 
         // temperature NTC
-        lbTemperatureNTC = new Label();
-        lbTemperatureNTC.setText("0 °C");
+//        lbTemperatureNTC = new Label();
+//        lbTemperatureNTC.setText("0 °C");
         xAxisTemperatureNTC = new NumberAxis(0, MAX_DATA_POINTS, MAX_DATA_POINTS / 10);
         xAxisTemperatureNTC.setForceZeroInRange(false);
         xAxisTemperatureNTC.setAutoRanging(false);
@@ -157,7 +172,7 @@ public class Hyperterminal extends Application {
             }
         };
         chartTemperatureNTC.setId("chartTemperatureNTC");
-        chartTemperatureNTC.setAnimated(true);
+        chartTemperatureNTC.setAnimated(false);
 //        chartTemperatureNTC.setTitle("Temperatura NTC");
 //        chartTemperatureNTC.setLegendVisible(false);
         chartTemperatureNTC.setTitle("Temperatura");
@@ -165,14 +180,51 @@ public class Hyperterminal extends Application {
         seriesTemperatureNTC.setName("Temperatura");
         chartTemperatureNTC.getData().add(seriesTemperatureNTC);
 
+        // lumens LDR
+        xAxisLumensLDR = new NumberAxis(0, MAX_DATA_POINTS, MAX_DATA_POINTS / 10);
+        xAxisLumensLDR.setForceZeroInRange(false);
+        xAxisLumensLDR.setAutoRanging(false);
+        xAxisLumensLDR.setTickLabelsVisible(false);
+        xAxisLumensLDR.setTickMarkVisible(false);
+        xAxisLumensLDR.setMinorTickVisible(false);
+        xAxisLumensLDR.setLabel("Tiempo");
+        NumberAxis yAxisLumensLDR = new NumberAxis();
+        yAxisLumensLDR.setLabel("Temperatura");
+        final XYChart<Number, Number> chartLumensLDR = new AreaChart<Number, Number>(xAxisLumensLDR, yAxisLumensLDR) {
+            // Override to remove symbols on each data point
+            @Override
+            protected void dataItemAdded(Series<Number, Number> series, int itemIndex, Data<Number, Number> item) {
+            }
+        };
+        chartLumensLDR.setId("chartLumensLDR");
+        chartLumensLDR.setAnimated(false);
+//        chartLumensLDR.setTitle("Lúmenes LDR");
+//        chartLumensLDR.setLegendVisible(false);
+        chartLumensLDR.setTitle("Lúmenes");
+        chartLumensLDR.setHorizontalGridLinesVisible(true);
+        seriesLumensLDR.setName("Lúmenes");
+        chartLumensLDR.getData().add(seriesLumensLDR);
+
         // animation PIR
         mMotionDetected = false;
         lbAnimation = new Label();
-        iiAnimationMotion = new Image("resources/animationMotion2.gif");
-        iiAnimationStopped = new Image("resources/animationStopped.jpg");
+        imgAnimationMotion = new Image("resources/animationMotion2.gif");
+        imgAnimationStopped = new Image("resources/animationStopped.jpg");
         ivAnimation = new ImageView();
-        ivAnimation.setImage(iiAnimationStopped);
+        ivAnimation.setImage(imgAnimationStopped);
         lbAnimation.setGraphic(ivAnimation);
+
+        // label color LDR
+        mLastColor = "white";
+        lbColor = new Label();
+        imgColorWhite = new Image("resources/colorWhite.png");
+        imgColorBlack = new Image("resources/colorBlack.png");
+        imgColorBlue = new Image("resources/colorBlue.png");
+        imgColorRed = new Image("resources/colorRed.png");
+        imgColorYellow = new Image("resources/colorYellow.png");
+        ivColor = new ImageView();
+        ivColor.setImage(imgColorWhite);
+        lbColor.setGraphic(ivColor);
 
         // setup pane
         GridPane root = new GridPane();
@@ -182,22 +234,21 @@ public class Hyperterminal extends Application {
 
         // add elements to pane
         root.add(chartTemperature, 0, 0, 1, 1);
-        root.add(lbTemperature, 0, 1, 1, 1);
-
+//        root.add(lbTemperature, 0, 1, 1, 1);
         root.add(chartResistance, 1, 0, 1, 1);
-        root.add(lbResistance, 1, 1, 1, 1);
-
+//        root.add(lbResistance, 1, 1, 1, 1);
         root.add(chartTemperatureNTC, 0, 2, 1, 1);
-        root.add(lbTemperatureNTC, 0, 3, 1, 1);
-
+//        root.add(lbTemperatureNTC, 0, 3, 1, 1);
+        root.add(chartLumensLDR, 1, 2, 1, 1);
 //        root.add(lbKeyPressed, 1, 2, 1, 1);
-        root.add(lbAnimation, 1, 2, 1, 1);
-        root.add(tfKeyPressed, 1, 4, 1, 1);
+        root.add(lbAnimation, 3, 0, 1, 1);
+//        root.add(tfKeyPressed, 1, 4, 1, 1);
+        root.add(lbColor, 3, 2, 1, 1);
 
         // alignment
-        GridPane.setHalignment(lbTemperature, CENTER);
-        GridPane.setHalignment(lbResistance, CENTER);
-        GridPane.setHalignment(lbTemperatureNTC, CENTER);
+//        GridPane.setHalignment(lbTemperature, CENTER);
+//        GridPane.setHalignment(lbResistance, CENTER);
+//        GridPane.setHalignment(lbTemperatureNTC, CENTER);
 
         // CSS and show
         Scene scene = new Scene(root, 800, 450);
@@ -237,26 +288,33 @@ public class Hyperterminal extends Application {
                     if (!"".equals(mReceivedData) && mReceivedData != null) {
 
                         String[] arrReceivedData = mReceivedData.split(",");
+
                         try {
                             String mTypeData = arrReceivedData[0];
                             String mValueDataS = arrReceivedData[1];
-                            int mValueData = Integer.parseInt(mValueDataS);
+                            int mValueData = 0;
+
+                            try {
+                                mValueData = Integer.parseInt(mValueDataS);
+                            } catch (NumberFormatException e) {
+//                                System.out.println("Error: " + e.getMessage());
+                            }
 
                             switch (mTypeData) {
 
                                 case "temp_LM35":
                                     dataTemperature.add(mValueData);
-                                    Platform.runLater(() -> lbTemperature.setText(mValueData + " °C"));
+//                                    Platform.runLater(() -> lbTemperature.setText(mValueData + " °C"));
                                     break;
 
                                 case "res_NTC":
                                     dataResistance.add(mValueData);
-                                    Platform.runLater(() -> lbResistance.setText(mValueData + " Ω"));
+//                                    Platform.runLater(() -> lbResistance.setText(mValueData + " Ω"));
                                     break;
 
                                 case "temp_NTC":
                                     dataTemperatureNTC.add(mValueData);
-                                    Platform.runLater(() -> lbTemperatureNTC.setText(mValueData + " °C"));
+//                                    Platform.runLater(() -> lbTemperatureNTC.setText(mValueData + " °C"));
                                     break;
 
                                 case "numberEntered":
@@ -264,70 +322,79 @@ public class Hyperterminal extends Application {
 //                                    Platform.runLater(() -> tfCalibrateNTC.setText(String.valueOf(mValueData)));
                                     break;
 
-                                case "key":
-                                    if (mValueDataS.equals("<-")) {
-                                        try {
-                                            Platform.runLater(() -> tfKeyPressed.setText("" + tfKeyPressed.getText().substring(0, tfKeyPressed.getText().length() - 1)));
-                                        } catch (Exception e) {
-                                            System.out.println("Error: no values");
-                                        }
-                                    } else {
-                                        Platform.runLater(() -> tfKeyPressed.appendText(String.valueOf(mValueData)));
-                                    }
-                                    break;
+//                                case "key":
+//                                    if (mValueDataS.equals("<-")) {
+//                                        try {
+//                                            Platform.runLater(() -> tfKeyPressed.setText("" + tfKeyPressed.getText().substring(0, tfKeyPressed.getText().length() - 1)));
+//                                        } catch (Exception e) {
+//                                            System.out.println("Error: no values");
+//                                        }
+//                                    } else {
+//                                        Platform.runLater(() -> tfKeyPressed.appendText(String.valueOf(mValueData)));
+//                                    }
+//                                    break;
 
 //                                case "eeprom_NTC_T0":
 //                                    System.out.println("eeprom_NTC_T0: " + String.valueOf(mValueData));
 //                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_T0: " + String.valueOf(mValueData) + "\n"));
 //                                    break;
-//
+
 //                                case "eeprom_NTC_B":
 //                                    System.out.println("eeprom_NTC_B: " + String.valueOf(mValueData));
 //                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_B: " + String.valueOf(mValueData) + "\n"));
 //                                    break;
 
                                 case "motionPIR":
-                                    System.out.println("motionPIR: " + String.valueOf(mValueData));
-
+//                                    System.out.println("motionPIR: " + String.valueOf(mValueData));
                                     if (mValueData == 1) {
                                         mMotionDetected = true;
                                     } else if (mValueData == 0) {
                                         mMotionDetected = false;
                                     }
 
-                                    if (mMotionDetected && ivAnimation.getImage() != iiAnimationMotion) {
-                                        ivAnimation.setImage(iiAnimationMotion);
-                                    } else if (!mMotionDetected && ivAnimation.getImage() != iiAnimationStopped) {
-                                        ivAnimation.setImage(iiAnimationStopped);
+                                    if (mMotionDetected && ivAnimation.getImage() != imgAnimationMotion) {
+                                        ivAnimation.setImage(imgAnimationMotion);
+                                    } else if (!mMotionDetected && ivAnimation.getImage() != imgAnimationStopped) {
+                                        ivAnimation.setImage(imgAnimationStopped);
                                     }
 
                                     break;
 
                                 case "fotoresistance":
-                                    Platform.runLater(() -> System.out.println("fotoresistance: " + String.valueOf(mValueData)));
+//                                    Platform.runLater(() -> System.out.println("fotoresistance: " + String.valueOf(mValueData)));
+                                    dataLumensLDR.add(mValueData);
                                     break;
 
                                 case "color":
-                                    System.out.println("" + mValueDataS);
-                                    switch (mValueDataS) {
-                                        case "blue":
-                                            Platform.runLater(() -> System.out.println("blue"));
-                                            break;
-                                        case "red":
-                                            Platform.runLater(() -> System.out.println("red"));
-                                            break;
-                                        case "yellow":
-                                            Platform.runLater(() -> System.out.println("yellow"));
-                                            break;
-                                        default:
-                                            System.out.println("fotoresistance: error");
-                                            break;
+                                    if (!mLastColor.equals(mValueDataS)) {
+//                                        System.out.println("mLastColor " + mLastColor);
+
+                                        switch (mValueDataS) {
+                                            case "white":
+                                                ivColor.setImage(imgColorWhite);
+                                                break;
+                                            case "black":
+                                                ivColor.setImage(imgColorBlack);
+                                                break;
+                                            case "blue":
+                                                ivColor.setImage(imgColorBlue);
+                                                break;
+                                            case "red":
+                                                ivColor.setImage(imgColorRed);
+                                                break;
+                                            case "yellow":
+                                                ivColor.setImage(imgColorYellow);
+                                                break;
+                                        }
+
+                                        mLastColor = mValueDataS;
                                     }
+
                                     break;
 
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
-//                            System.out.println("Error: " + e.getLocalizedMessage());
+//                            System.out.println("Error: " + e.getMessage());
                         }
 
                     }
@@ -359,13 +426,16 @@ public class Hyperterminal extends Application {
             if (dataTemperature.isEmpty()
                     || dataResistance.isEmpty()
                     || dataTemperatureNTC.isEmpty()
+                    || dataLumensLDR.isEmpty()
                     ) {
                 break;
             }
             seriesTemperature.getData().add(new Data<>(xSeriesDataTemperature++, dataTemperature.remove()));
             seriesResistance.getData().add(new Data<>(xSeriesDataResistance++, dataResistance.remove()));
             seriesTemperatureNTC.getData().add(new Data<>(xSeriesDataTemperatureNTC++, dataTemperatureNTC.remove()));
+            seriesLumensLDR.getData().add(new Data<>(xSeriesDataLumensLDR++, dataLumensLDR.remove()));
         }
+
         // remove points to keep us at no more than MAX_DATA_POINTS
         if (seriesTemperature.getData().size() > MAX_DATA_POINTS) {
             seriesTemperature.getData().remove(0, seriesTemperature.getData().size() - MAX_DATA_POINTS);
@@ -376,6 +446,10 @@ public class Hyperterminal extends Application {
         if (seriesTemperatureNTC.getData().size() > MAX_DATA_POINTS) {
             seriesTemperatureNTC.getData().remove(0, seriesTemperatureNTC.getData().size() - MAX_DATA_POINTS);
         }
+        if (seriesLumensLDR.getData().size() > MAX_DATA_POINTS) {
+            seriesLumensLDR.getData().remove(0, seriesLumensLDR.getData().size() - MAX_DATA_POINTS);
+        }
+
         // update
         xAxisTemperature.setLowerBound(xSeriesDataTemperature - MAX_DATA_POINTS);
         xAxisTemperature.setUpperBound(xSeriesDataTemperature - 1);
@@ -383,6 +457,8 @@ public class Hyperterminal extends Application {
         xAxisResistance.setUpperBound(xSeriesDataResistance - 1);
         xAxisTemperatureNTC.setLowerBound(xSeriesDataTemperatureNTC - MAX_DATA_POINTS);
         xAxisTemperatureNTC.setUpperBound(xSeriesDataTemperatureNTC - 1);
+        xAxisLumensLDR.setLowerBound(xSeriesDataLumensLDR - MAX_DATA_POINTS);
+        xAxisLumensLDR.setUpperBound(xSeriesDataLumensLDR - 1);
     }
 
     public static void main(String[] args) {

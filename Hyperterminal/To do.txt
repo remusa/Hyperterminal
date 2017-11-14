@@ -1,0 +1,93 @@
+---------------------------------------
+ARDUINO
+---------------------------------------
+ARDUINO:
+    [ ]Teclado por imagen en SD al LCD.
+    [ ]Gráficas en LCD interactivas y continuas.
+    [ ]Calibración de todos los sensores.
+
+---------------------------------------
+SENSORES
+---------------------------------------
+
+PRÁCTICA 7: SENSOR DE MOVIMIENTO
+    [ ]Gráfica de detección de movimiento:
+        [X]Hyperterminal.
+        [ ]LCD.
+    [X]No se calibra.
+
+PRÁCTICA 6: FOTORESISTENCIA
+    [ ]Por medio de una fotorresistencia (LDR) detectar los lúmenes encontrados en el ambiente. El circuito de acoplamiento a utilizar será la fuente de corriente vista en clase.
+    [ ]Gráfica de lúmenes:
+        [ ]Hyperterminal.
+        [ ]LCD.
+    [ ]Calibración.
+
+PRÁCTICA 5: SENSOR DE COLOR
+    [ ]Detectar colores: azul, amarillo, rojo, blanco y negro.
+    [ ]Circuito: fuente de corriente vista en clase.
+    [ ]LED blanco.
+    [ ]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
+    [ ]Gráfica de color (mostrar que color es):
+        [ ]Hyperterminal.
+        [ ]LCD.
+    [ ]Calibración.
+
+---------------------------------------
+REPORTE
+---------------------------------------
+REPORTE:
+    Formato IEEE (doble columna), 3ra. persona, ortografía y puntuación, referencias de libros.
+        -Introducción
+        -Marco teórico
+            -Definiciones
+            -Fórmulas
+        -Desarrollo
+            -Simulaciones o diagramas de flujo explicados (de Arduino y de hyperterminal)
+        -Resultados
+        -Conclusiones (problemas)
+        -Referencias bibliográficas
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+---------------------------------------
+ACTUADORES
+---------------------------------------
+1.
+    -Controlar servomotor dependiendo de luxes.
+    -Servo no puede estar vibrando (frecuencia está mal), debe quedarse fijo.
+    -Gráfica que diga cuantos luxes.
+
+2.
+    -Controlar ventilador dependiendo de sensores de temperatura (lectura de ambos).
+    -Manejar luxes (mostrar en LCD con una animación).
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+---------------------------------------
+PROYECTO FINAL
+---------------------------------------
+    -Videojuego.
+    -Utilizar un IMU digital (acelerómetro o giróscopo).
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+---------------------------------------
+UNIDADES PASADAS
+---------------------------------------
+LM35
+    -Checar fórmula del sensor
+    -Calibrar T0, multiplicador
+
+NTC
+    -Ecuación en marco teórico
+
+Gráficas:
+    -Temperatura (filtrar usando los 2 sensores).
