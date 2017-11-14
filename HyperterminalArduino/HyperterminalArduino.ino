@@ -132,14 +132,18 @@ int motionPIRstate;
 int fotoresistance;
 #define colorWhiteMIN     935
 #define colorWhiteMAX     955
+
 #define colorBlackMIN     75
 #define colorBlackMAX     100
-#define colorBlueMIN      250
-#define colorBlueMAX      285
-#define colorRedMIN       785
-#define colorRedMAX       795
-#define colorYellowMIN    855
-#define colorYellowMAX    865
+
+#define colorBlueMIN      970
+#define colorBlueMAX      980
+
+#define colorRedMIN       935
+#define colorRedMAX       945
+
+#define colorYellowMIN    895
+#define colorYellowMAX    905
 
 void setup() {
   Serial.begin(9600);

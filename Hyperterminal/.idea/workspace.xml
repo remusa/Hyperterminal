@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6446dcc-a521-4a1e-9b1b-371bb5cf1011" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/datasheets/CDS_Photoresistors_-_PGM_Series.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/datasheets/Full_Color_LED_Common_Cathode_5mm.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/datasheets/LDR_C-2795.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/fritzing/sensor_colores_RGB_esquema.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/fritzing/sensor_colores_RGB_protoboard.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/p02_sensor_de_colores_RGB.rar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/src/sketch_arduino/sketch_arduino.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/src/sketch_processing/sketch.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_LDR/p02_sensor_de_colores_RGB/src/sketch_processing/sketch_processing.pde" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_PIR/Sensor_PIR.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Test/Test.ino" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +27,8 @@
       <file leaf-file-name="Hyperterminal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="383" column="33" lean-forward="false" selection-start-line="383" selection-start-column="33" selection-end-line="383" selection-end-column="33" />
+            <state relative-caret-position="32">
+              <caret line="377" column="54" lean-forward="true" selection-start-line="377" selection-start-column="54" selection-end-line="377" selection-end-column="54" />
               <folding>
                 <element signature="e#0#20746#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -1056,8 +1066,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="383" column="33" lean-forward="false" selection-start-line="383" selection-start-column="33" selection-end-line="383" selection-end-column="33" />
+        <state relative-caret-position="32">
+          <caret line="377" column="54" lean-forward="true" selection-start-line="377" selection-start-column="54" selection-end-line="377" selection-end-column="54" />
           <folding>
             <element signature="e#0#20746#0" expanded="true" />
             <element signature="imports" expanded="true" />
