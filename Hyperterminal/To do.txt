@@ -9,7 +9,6 @@ ARDUINO:
 ---------------------------------------
 SENSORES
 ---------------------------------------
-
 PRÁCTICA 7: SENSOR DE MOVIMIENTO
     [ ]Gráfica de detección de movimiento:
         [X]Hyperterminal.
@@ -17,19 +16,20 @@ PRÁCTICA 7: SENSOR DE MOVIMIENTO
     [X]No se calibra.
 
 PRÁCTICA 6: FOTORESISTENCIA
-    [ ]Por medio de una fotorresistencia (LDR) detectar los lúmenes encontrados en el ambiente. El circuito de acoplamiento a utilizar será la fuente de corriente vista en clase.
+    [X]Por medio de una fotorresistencia (LDR) detectar los lúmenes encontrados en el ambiente.
+    [ ]Circuito de acoplamiento a utilizar será la fuente de corriente vista en clase.
     [ ]Gráfica de lúmenes:
-        [ ]Hyperterminal.
+        [X]Hyperterminal.
         [ ]LCD.
     [ ]Calibración.
 
 PRÁCTICA 5: SENSOR DE COLOR
     [ ]Detectar colores: azul, amarillo, rojo, blanco y negro.
     [ ]Circuito: fuente de corriente vista en clase.
-    [ ]LED blanco.
+    [X]LED blanco.
     [ ]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
     [ ]Gráfica de color (mostrar que color es):
-        [ ]Hyperterminal.
+        [X]Hyperterminal.
         [ ]LCD.
     [ ]Calibración.
 
