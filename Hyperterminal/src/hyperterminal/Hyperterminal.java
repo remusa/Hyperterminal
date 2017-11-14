@@ -16,13 +16,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
 import java.io.OutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -46,9 +46,6 @@ public class Hyperterminal extends Application {
     private Label lbKeyPressed;
     private TextField tfKeyPressed;
 
-    //EEPROM values
-    private TextArea taEEPROM;
-
     //Chart temperature LM35
     private int xSeriesDataTemperature = 0;
     private Series<Number, Number> seriesTemperature = new Series<>();
@@ -70,6 +67,13 @@ public class Hyperterminal extends Application {
     private Label lbTemperatureNTC;
     private NumberAxis xAxisTemperatureNTC;
 
+    //Animation motion sensor PIR
+    private Label lbAnimation;
+    private Image iiAnimationMotion;
+    private Image iiAnimationStopped;
+    private ImageView ivAnimation;
+    private boolean mMotionDetected;
+
     private void init(Stage primaryStage) {
         // serial port
         serialPortCommunication = new SerialPortCommunication();
@@ -79,10 +83,6 @@ public class Hyperterminal extends Application {
         lbKeyPressed = new Label();
         lbKeyPressed.setText("Teclado: ");
         tfKeyPressed = new TextField("Teclado: \n");
-
-        // EEPROM
-        taEEPROM = new TextArea();
-        taEEPROM.appendText("EEPROM: \n");
 
         // temperature LM35
         lbTemperature = new Label();
@@ -102,10 +102,10 @@ public class Hyperterminal extends Application {
             protected void dataItemAdded(Series<Number, Number> series, int itemIndex, Data<Number, Number> item) {
             }
         };
-//        chartTemperature.setLegendVisible(false);
         chartTemperature.setId("chartTemperature");
         chartTemperature.setAnimated(true);
 //        chartTemperature.setTitle("Temperatura LM35");
+//        chartTemperature.setLegendVisible(false);
         chartTemperature.setTitle("Temperatura");
         chartTemperature.setHorizontalGridLinesVisible(true);
         seriesTemperature.setName("Temperatura");
@@ -129,10 +129,10 @@ public class Hyperterminal extends Application {
             protected void dataItemAdded(Series<Number, Number> series, int itemIndex, Data<Number, Number> item) {
             }
         };
-//        chartResistance.setLegendVisible(false);
         chartResistance.setId("chartResistance");
         chartResistance.setAnimated(true);
 //        chartResistance.setTitle("Resistencia LM35");
+//        chartResistance.setLegendVisible(false);
         chartResistance.setTitle("Resistencia");
         chartResistance.setHorizontalGridLinesVisible(true);
         seriesResistance.setName("Resistencia");
@@ -156,14 +156,23 @@ public class Hyperterminal extends Application {
             protected void dataItemAdded(Series<Number, Number> series, int itemIndex, Data<Number, Number> item) {
             }
         };
-//        chartTemperatureNTC.setLegendVisible(false);
         chartTemperatureNTC.setId("chartTemperatureNTC");
         chartTemperatureNTC.setAnimated(true);
 //        chartTemperatureNTC.setTitle("Temperatura NTC");
+//        chartTemperatureNTC.setLegendVisible(false);
         chartTemperatureNTC.setTitle("Temperatura");
         chartTemperatureNTC.setHorizontalGridLinesVisible(true);
         seriesTemperatureNTC.setName("Temperatura");
         chartTemperatureNTC.getData().add(seriesTemperatureNTC);
+
+        // animation PIR
+        mMotionDetected = false;
+        lbAnimation = new Label();
+        iiAnimationMotion = new Image("resources/animationMotion2.gif");
+        iiAnimationStopped = new Image("resources/animationStopped.jpg");
+        ivAnimation = new ImageView();
+        ivAnimation.setImage(iiAnimationStopped);
+        lbAnimation.setGraphic(ivAnimation);
 
         // setup pane
         GridPane root = new GridPane();
@@ -182,7 +191,7 @@ public class Hyperterminal extends Application {
         root.add(lbTemperatureNTC, 0, 3, 1, 1);
 
 //        root.add(lbKeyPressed, 1, 2, 1, 1);
-        root.add(taEEPROM, 1, 2, 1, 1);
+        root.add(lbAnimation, 1, 2, 1, 1);
         root.add(tfKeyPressed, 1, 4, 1, 1);
 
         // alignment
@@ -192,9 +201,8 @@ public class Hyperterminal extends Application {
 
         // CSS and show
         Scene scene = new Scene(root, 800, 450);
-        File file = new File("resources/stylesheet.css");
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + file.getAbsolutePath().replace("\\", "/"));
+        scene.getStylesheets().add("resources/stylesheet.css");
         primaryStage.setScene(scene);
     }
 
@@ -268,29 +276,35 @@ public class Hyperterminal extends Application {
                                     }
                                     break;
 
-                                case "eeprom_NTC_T0":
-                                    System.out.println("eeprom_NTC_T0: " + String.valueOf(mValueData));
-                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_T0: " + String.valueOf(mValueData) + "\n"));
-                                    break;
-
-                                case "eeprom_NTC_B":
-                                    System.out.println("eeprom_NTC_B: " + String.valueOf(mValueData));
-                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_B: " + String.valueOf(mValueData) + "\n"));
-                                    break;
+//                                case "eeprom_NTC_T0":
+//                                    System.out.println("eeprom_NTC_T0: " + String.valueOf(mValueData));
+//                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_T0: " + String.valueOf(mValueData) + "\n"));
+//                                    break;
+//
+//                                case "eeprom_NTC_B":
+//                                    System.out.println("eeprom_NTC_B: " + String.valueOf(mValueData));
+//                                    Platform.runLater(() -> taEEPROM.appendText("\tNTC_B: " + String.valueOf(mValueData) + "\n"));
+//                                    break;
 
                                 case "motionPIR":
                                     System.out.println("motionPIR: " + String.valueOf(mValueData));
+
                                     if (mValueData == 1) {
-                                        System.out.println("motion detected");
-                                        Platform.runLater(() -> System.out.println(""));
+                                        mMotionDetected = true;
                                     } else if (mValueData == 0) {
-                                        System.out.println("motion stopped");
-                                        Platform.runLater(() -> System.out.println(""));
+                                        mMotionDetected = false;
                                     }
+
+                                    if (mMotionDetected && ivAnimation.getImage() != iiAnimationMotion) {
+                                        ivAnimation.setImage(iiAnimationMotion);
+                                    } else if (!mMotionDetected && ivAnimation.getImage() != iiAnimationStopped) {
+                                        ivAnimation.setImage(iiAnimationStopped);
+                                    }
+
                                     break;
 
                                 case "fotoresistance":
-                                    Platform.runLater(() -> System.out.println("fotoresistance" + String.valueOf(mValueData)));
+                                    Platform.runLater(() -> System.out.println("fotoresistance: " + String.valueOf(mValueData)));
                                     break;
 
                                 case "color":

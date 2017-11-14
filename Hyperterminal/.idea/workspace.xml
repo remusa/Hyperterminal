@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6446dcc-a521-4a1e-9b1b-371bb5cf1011" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Hyperterminal_Todo.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Keypad.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Menu.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Sensor_LDR.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Sensor_LM35.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Sensor_NTC.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Sensor_PIR.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/Sensors.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_Todo/X.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Hyperterminal_U1_Temp&amp;Keyboard.7z" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Sensor_PIR/p02_sensor_de_colores_RGB.rar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/stylesheet.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$1.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$2.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$3.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal$3.class" />
@@ -21,8 +11,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal.class" afterPath="$PROJECT_DIR$/out/production/Hyperterminal/hyperterminal/Hyperterminal.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" afterPath="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Sensor_LDR/Sensor_LDR.ino" afterPath="$PROJECT_DIR$/../Sensor_LDR/Sensor_LDR.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Test/Test.ino" afterPath="$PROJECT_DIR$/../Test/Test.ino" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,31 +22,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Hyperterminal.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Hyperterminal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="299" column="92" lean-forward="false" selection-start-line="299" selection-start-column="88" selection-end-line="299" selection-end-column="92" />
+            <state relative-caret-position="138">
+              <caret line="227" column="5" lean-forward="true" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
               <folding>
-                <element signature="e#0#16523#0" expanded="true" />
+                <element signature="e#0#17129#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#3476#3492#0" expanded="true" />
-                <element signature="e#4838#4854#0" expanded="true" />
-                <element signature="e#6238#6254#0" expanded="true" />
                 <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-                <element signature="e#14556#14702#0" expanded="true" />
-                <element signature="e#14701#14702#0" expanded="true" />
                 <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="To do.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="To do.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/To do.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+            <state relative-caret-position="102">
+              <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -81,7 +64,11 @@
       <find>String.valueOf(mValueData)</find>
       <find>serialPortCommunication</find>
       <find>System.err</find>
+      <find>-</find>
     </findStrings>
+    <replaceStrings>
+      <replace>[ ]</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -102,8 +89,9 @@
         <option value="$PROJECT_DIR$/resources/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/arduino/JSSC.java" />
         <option value="$PROJECT_DIR$/src/arduino/SerialPortCommunication.java" />
-        <option value="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" />
+        <option value="$PROJECT_DIR$/src/resources/stylesheet.css" />
         <option value="$PROJECT_DIR$/To do.txt" />
+        <option value="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" />
       </list>
     </option>
   </component>
@@ -120,10 +108,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="563" />
-    <option name="y" value="359" />
-    <option name="width" value="799" />
-    <option name="height" value="403" />
+    <option name="x" value="512" />
+    <option name="y" value="205" />
+    <option name="width" value="850" />
+    <option name="height" value="559" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -211,8 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -247,6 +233,29 @@
             <path>
               <item name="Hyperterminal" type="58d84e3e:PackageViewProjectNode" />
               <item name="Hyperterminal" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="Hyperterminal" type="cbb8eebc:String" user="Hyperterminal" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="Hyperterminal" type="cbb8eebc:String" user="Hyperterminal" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="Hyperterminal" type="cbb8eebc:String" user="Hyperterminal" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="resources" type="cbb8eebc:String" user="resources" />
             </path>
           </expand>
           <select />
@@ -607,14 +616,14 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31553397" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30420712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17961165" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17549168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18003026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -627,28 +636,28 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32038835" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31893688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31553397" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30420712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29935277" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17549168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18003026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32038835" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31893688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -673,23 +682,33 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added TODO" />
+    <option name="LAST_COMMIT_MESSAGE" value="added TODO" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
-          <line>295</line>
+          <line>309</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
-          <line>280</line>
+          <line>288</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java</url>
+          <line>305</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -700,17 +719,54 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4930">
+          <caret line="290" column="99" lean-forward="false" selection-start-line="290" selection-start-column="99" selection-end-line="290" selection-end-column="99" />
+          <folding>
+            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/To do.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4930">
+          <caret line="290" column="99" lean-forward="true" selection-start-line="290" selection-start-column="99" selection-end-line="290" selection-end-column="99" />
+          <folding>
+            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/To do.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -720,9 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1088">
           <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -731,14 +784,9 @@
         <state relative-caret-position="4284">
           <caret line="279" column="51" lean-forward="false" selection-start-line="279" selection-start-column="38" selection-end-line="279" selection-end-column="51" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -748,9 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1088">
           <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -759,14 +804,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -776,9 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
           <caret line="74" column="43" lean-forward="true" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -787,14 +824,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -804,76 +836,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css" />
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css" />
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3672">
           <caret line="247" column="0" lean-forward="false" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css" />
     <entry file="file://$PROJECT_DIR$/src/arduino/SerialPortCommunication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -882,14 +880,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -900,14 +893,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16523#0" expanded="true" />
+            <element signature="e#0#17129#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
             <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
             <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
           </folding>
         </state>
@@ -969,13 +957,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/arduino/Connection.java" />
-    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/stylesheet.css" />
     <entry file="file://$PROJECT_DIR$/nbproject/private/retriever/www.oracle.com/technetwork/java/javase/overview/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -994,7 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="139" column="9" lean-forward="false" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,35 +1006,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
+    <entry file="file://$PROJECT_DIR$/src/resources/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="299" column="92" lean-forward="false" selection-start-line="299" selection-start-column="88" selection-end-line="299" selection-end-column="92" />
-          <folding>
-            <element signature="e#0#16523#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#3476#3492#0" expanded="true" />
-            <element signature="e#4838#4854#0" expanded="true" />
-            <element signature="e#6238#6254#0" expanded="true" />
-            <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
-            <element signature="e#14556#14702#0" expanded="true" />
-            <element signature="e#14701#14702#0" expanded="true" />
-            <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="34">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/To do.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        <state relative-caret-position="102">
+          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="227" column="5" lean-forward="true" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#17129#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#prepareTimeline#0;class#Hyperterminal#0" expanded="false" />
+            <element signature="method#addDataToSeries#0;class#Hyperterminal#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
