@@ -49,9 +49,6 @@ public class Hyperterminal extends Application {
     //EEPROM values
     private TextArea taEEPROM;
 
-    //Calibrate NTC
-    private TextField tfCalibrateNTC;
-
     //Chart temperature LM35
     private int xSeriesDataTemperature = 0;
     private Series<Number, Number> seriesTemperature = new Series<>();
@@ -86,10 +83,6 @@ public class Hyperterminal extends Application {
         // EEPROM
         taEEPROM = new TextArea();
         taEEPROM.appendText("EEPROM: \n");
-
-        // calibrate NTC
-        tfCalibrateNTC = new TextField("");
-        tfCalibrateNTC.setEditable(false);
 
         // temperature LM35
         lbTemperature = new Label();
@@ -187,7 +180,6 @@ public class Hyperterminal extends Application {
 
         root.add(chartTemperatureNTC, 0, 2, 1, 1);
         root.add(lbTemperatureNTC, 0, 3, 1, 1);
-        root.add(tfCalibrateNTC, 0, 4, 1, 1);
 
 //        root.add(lbKeyPressed, 1, 2, 1, 1);
         root.add(taEEPROM, 1, 2, 1, 1);
@@ -197,7 +189,6 @@ public class Hyperterminal extends Application {
         GridPane.setHalignment(lbTemperature, CENTER);
         GridPane.setHalignment(lbResistance, CENTER);
         GridPane.setHalignment(lbTemperatureNTC, CENTER);
-        GridPane.setHalignment(tfCalibrateNTC, CENTER);
 
         // CSS and show
         Scene scene = new Scene(root, 800, 450);
@@ -262,7 +253,7 @@ public class Hyperterminal extends Application {
 
                                 case "numberEntered":
                                     System.out.println("numberEntered: " + String.valueOf(mValueData));
-                                    Platform.runLater(() -> tfCalibrateNTC.setText(String.valueOf(mValueData)));
+//                                    Platform.runLater(() -> tfCalibrateNTC.setText(String.valueOf(mValueData)));
                                     break;
 
                                 case "key":
@@ -287,6 +278,39 @@ public class Hyperterminal extends Application {
                                     Platform.runLater(() -> taEEPROM.appendText("\tNTC_B: " + String.valueOf(mValueData) + "\n"));
                                     break;
 
+                                case "motionPIR":
+                                    System.out.println("motionPIR: " + String.valueOf(mValueData));
+                                    if (mValueData == 1) {
+                                        System.out.println("motion detected");
+                                        Platform.runLater(() -> System.out.println(""));
+                                    } else if (mValueData == 0) {
+                                        System.out.println("motion stopped");
+                                        Platform.runLater(() -> System.out.println(""));
+                                    }
+                                    break;
+
+                                case "fotoresistance":
+                                    Platform.runLater(() -> System.out.println("fotoresistance" + String.valueOf(mValueData)));
+                                    break;
+
+                                case "color":
+                                    System.out.println("" + mValueDataS);
+                                    switch (mValueDataS) {
+                                        case "blue":
+                                            Platform.runLater(() -> System.out.println("blue"));
+                                            break;
+                                        case "red":
+                                            Platform.runLater(() -> System.out.println("red"));
+                                            break;
+                                        case "yellow":
+                                            Platform.runLater(() -> System.out.println("yellow"));
+                                            break;
+                                        default:
+                                            System.out.println("fotoresistance: error");
+                                            break;
+                                    }
+                                    break;
+
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
 //                            System.out.println("Error: " + e.getLocalizedMessage());
@@ -296,56 +320,6 @@ public class Hyperterminal extends Application {
                 } catch (NumberFormatException | NullPointerException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
-
-                //send data
-                /*tfCalibrateNTC.setOnKeyReleased(event -> {
-                    if (event.getCode() == KeyCode.ENTER) {
-                        try {
-                            outputStream = serialPortCommunication.serialPort.getOutputStream();
-                            String messageString = tfCalibrateNTC.getText();
-
-                            try {
-                                int n = Integer.parseInt(messageString);
-
-                                if (n >= -55 && n <= 150) {
-                                    outputStream.write(messageString.getBytes());
-                                    System.out.println(messageString);
-                                    outputStream.close();
-                                }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: no es un número");
-                            }
-
-//                            if (messageString.matches("^[+-]?\\d+$")   //"\\d+"
-//                                    && Integer.parseInt(messageString) >= -55
-//                                    && Integer.parseInt(messageString) <= 150) {
-//                                outputStream.write(messageString.getBytes());
-//                                System.out.println(messageString);
-//                                outputStream.close();
-//                            } else {
-//                                System.out.println("Error: no es un número");
-//                            }
-
-                        } catch (IOException e) {
-                            System.out.println("Error: " + e.getMessage());
-                        }
-                    }
-                });*/
-
-//                tfCalibrateNTC.textProperty().addListener(new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                        try {
-//                            outputStream = serialPortCommunication.serialPort.getOutputStream();
-//                            String messageString = tfCalibrateNTC.getText();
-//                            outputStream.write(messageString.getBytes());
-//                            System.out.println(messageString);
-//                            outputStream.close();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
 
                 Thread.sleep(1);
                 executor.execute(this);
