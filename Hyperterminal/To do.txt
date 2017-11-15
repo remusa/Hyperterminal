@@ -3,7 +3,7 @@ ARDUINO
 ---------------------------------------
 ARDUINO:
     [ ]Teclado por imagen en SD al LCD.
-    [ ]Gráficas en LCD interactivas y continuas.
+    [X]Gráficas en LCD interactivas y continuas.
     [ ]Calibración de todos los sensores.
 
 ---------------------------------------
@@ -17,36 +17,36 @@ PRÁCTICA 7: SENSOR DE MOVIMIENTO
 
 PRÁCTICA 6: FOTORESISTENCIA
     [X]Por medio de una fotorresistencia (LDR) detectar los lúmenes encontrados en el ambiente.
-    [ ]Circuito de acoplamiento a utilizar será la fuente de corriente vista en clase.
-    [ ]Gráfica de lúmenes:
+    [ ]Circuito: fuente de corriente vista en clase.
+    [X]Gráfica de lúmenes:
         [X]Hyperterminal.
-        [ ]LCD.
-    [ ]Calibración.
+        [X]LCD.
+    [X]Calibración.
 
 PRÁCTICA 5: SENSOR DE COLOR
-    [ ]Detectar colores: azul, amarillo, rojo, blanco y negro.
+    [X]Detectar colores: azul, amarillo, rojo, blanco y negro.
     [ ]Circuito: fuente de corriente vista en clase.
     [X]LED blanco.
-    [ ]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
-    [ ]Gráfica de color (mostrar que color es):
+    [X]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
+    [X]Gráfica de color (mostrar que color es):
         [X]Hyperterminal.
-        [ ]LCD.
-    [ ]Calibración.
+        [X]LCD.
+    [X]Calibración.
 
 ---------------------------------------
 REPORTE
 ---------------------------------------
 REPORTE:
-    Formato IEEE (doble columna), 3ra. persona, ortografía y puntuación, referencias de libros.
-        -Introducción
-        -Marco teórico
-            -Definiciones
-            -Fórmulas
-        -Desarrollo
-            -Simulaciones o diagramas de flujo explicados (de Arduino y de hyperterminal)
-        -Resultados
-        -Conclusiones (problemas)
-        -Referencias bibliográficas
+    [X]Formato IEEE (doble columna), 3ra. persona, ortografía y puntuación.
+        [x]Introducción
+        [X]Marco teórico
+            [X]Definiciones
+            [X]Fórmulas
+        [X]Desarrollo
+            [X]Simulaciones o diagramas de flujo explicados (de Arduino y de hyperterminal)
+        [X]Resultados
+        [X]Conclusiones (problemas)
+        [X]Referencias bibliográficas de libros
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

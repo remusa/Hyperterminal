@@ -100,11 +100,14 @@ double rightColPositionX = center + fromCenter;
 //EEPROM
 #define T0_EEPROM  0    //temp ambiente           -> EEPROM address
 #define B_EEPROM   1    //constante calibración   -> EEPROM address
+#define R_EEPROM   2    //resistencia LDR         -> EEPROM address
 
 //General
 uint16_t i;                 //read count
-int menu;                   //menu number -> 0=Main, 1=LM35, 2=NTC, 99=keyboard
-int menuBack;
+uint16_t j;                 //menu update
+
+uint8_t menu;                   //menu number -> 0=Main, 1=LM35, 2=NTC, 3=PIR, 4=LDR, 99=keyboard
+uint8_t menuBack;
 String variableCalibration;
 
 //Keyboard
@@ -130,26 +133,37 @@ int motionPIRstate;
 #define pinLDR    A10
 #define pinLED    40
 int fotoresistance;
-#define colorWhiteMIN     935
-#define colorWhiteMAX     955
+String color;
+#define colorWhiteMIN     830 //ok
+#define colorWhiteMAX     840 //ok
+#define colorBlackMIN     685 //ok
+#define colorBlackMAX     795 //ok
+#define colorBlueMIN      805 //ok
+#define colorBlueMAX      805 //ok
+#define colorRedMIN       764 //ok
+#define colorRedMAX       774 //ok
+#define colorYellowMIN    799 //ok
+#define colorYellowMAX    820 //ok
+/*#define A   1000     //Resistencia en oscuridad en KΩ
+  #define B   15       //Resistencia a la luz (10 Lux) en KΩ
+  #define Rc  10
+  int ilum;*/
+#define MAX_ADC_READING           1023
+#define ADC_REF_VOLTAGE           5.0
+#define REF_RESISTANCE_DEF        10000
+#define LUX_CALC_SCALAR           12518931
+#define LUX_CALC_EXPONENT         -1.405
+int REF_RESISTANCE;
 
-#define colorBlackMIN     75
-#define colorBlackMAX     100
-
-#define colorBlueMIN      970
-#define colorBlueMAX      980
-
-#define colorRedMIN       935
-#define colorRedMAX       945
-
-#define colorYellowMIN    895
-#define colorYellowMAX    905
+int   ldrRawData;
+float resistorVoltage, ldrVoltage, ldrResistance, ldrLux;
 
 void setup() {
   Serial.begin(9600);
   analogReference(DEFAULT);
   pinMode(3, OUTPUT);
   i = 0;
+  j = 0;
 
   ///////////////////////
   ///     EEPROM      ///
@@ -160,11 +174,15 @@ void setup() {
   /*Serial.print("eeprom_NTC_T0,");
     Serial.println(NTC_T0);
     Serial.print("eeprom_NTC_B,");
-    Serial.println(NTC_B);*/
+    Serial.println(NTC_B);
+    Serial.print("eeprom_LDR_R,");
+    Serial.println(REF_RESISTANCE);*/
 
   //Read values from EEPROM
   NTC_T0 = EEPROM.read(T0_EEPROM);
   NTC_B = EEPROM.read(B_EEPROM);
+  REF_RESISTANCE = EEPROM.read(R_EEPROM);
+  REF_RESISTANCE = REF_RESISTANCE * 1000;
 
   ///////////////////////
   ///     SENSORS     ///
@@ -193,6 +211,8 @@ void setup() {
   menu = 0;
   menuMain();
   pinMode(13, OUTPUT);
+
+  defaultCalibration();
 }
 
 void loop() {
@@ -205,6 +225,10 @@ void loop() {
   ///     SENSORS     ///
   ///////////////////////
   getSensors();
+}
+
+void defaultCalibration() {
+
 }
 
 void getPressed() {
@@ -231,14 +255,28 @@ void getPressed() {
     ///////////////////////
     if (menu == 0) {
       //BUTTON LM35
-      if (p.y >= 30 && p.y <= 420 && p.x >= 92 && p.x <= 133) {
+      if (p.y >= 8 && p.y <= 238
+          && p.x >= 94 && p.x <= 124) {
         //Serial.println("BUTTON LM35");
         menuLM35();
       }
       //BUTTON NTC
-      if (p.y >= 30 && p.y <= 420 && p.x >= 150 && p.x <= 200) {
+      if (p.y >= 8 && p.y <= 238
+          && p.x >= 144 && p.x <= 174) {
         //Serial.println("BUTTON NTC");
         menuNTC();
+      }
+      //BUTTON PIR
+      if (p.y >= 8 && p.y <= 238
+          && p.x >= 194 && p.x <= 224) {
+        //Serial.println("BUTTON PIR");
+        menuPIR();
+      }
+      //BUTTON LDR
+      if (p.y >= 8 && p.y <= 238
+          && p.x >= 244 && p.x <= 274) {
+        //Serial.println("BUTTON LDR");
+        menuLDR();
       }
     }
 
@@ -249,13 +287,14 @@ void getPressed() {
       menuBack = 1;
 
       //RELOAD VALUES
-      if (p.y >= 30 && p.y <= 420 && p.x >= 185 && p.x <= 235) {
+      /*if (p.y >= 30 && p.y <= 420 && p.x >= 185 && p.x <= 235) {
         //Serial.println("BUTTON RELOAD");
         menuLM35();
-      }
+        }*/
 
       //BUTTON MAIN MENU
-      if (p.y >= 30 && p.y <= 420 && p.x >= 248 && p.x <= 285) {
+      if (p.y >= 123 && p.y <= 352
+          && p.x >= 264 && p.x <= 302) {
         //Serial.println("BUTTON MAIN");
         menuMain();
       }
@@ -267,28 +306,61 @@ void getPressed() {
     if (menu == 2) {
       menuBack = 2;
 
-      //RELOAD VALUES
-      if (p.y >= 30 && p.y <= 420 && p.x >= 185 && p.x <= 235) {
-        //Serial.println("BUTTON RELOAD");
-        menuNTC();
-      }
-
       //BUTTON CALIBRATE T0
-      if (p.y >= 320 && p.y <= 380 && p.x >= 50 && p.x <= 83) {
+      if (p.y >= 320 && p.y <= 380
+          && p.x >= 50 && p.x <= 83) {
         //Serial.println("BUTTON CALIBRATE T0");
         variableCalibration = "NTC_T0";
         menuKeypad();
       }
 
       //BUTTON CALIBRATE B
-      if (p.y >= 320 && p.y <= 380 && p.x >= 100 && p.x <= 135) {
+      if (p.y >= 320 && p.y <= 380
+          && p.x >= 100 && p.x <= 135) {
         //Serial.println("BUTTON CALIBRATE B");
         variableCalibration = "NTC_B";
         menuKeypad();
       }
 
       //BUTTON MAIN MENU
-      if (p.y >= 30 && p.y <= 420 && p.x >= 248 && p.x <= 285) {
+      if (p.y >= 123 && p.y <= 352
+          && p.x >= 264 && p.x <= 302) {
+        //Serial.println("BUTTON MAIN");
+        menuMain();
+      }
+    }
+
+    ///////////////////////
+    ///     PIR         ///
+    ///////////////////////
+    if (menu == 3) {
+      menuBack = 3;
+
+      //BUTTON MAIN MENU
+      if (p.y >= 123 && p.y <= 352
+          && p.x >= 264 && p.x <= 302) {
+        //Serial.println("BUTTON MAIN");
+        menuMain();
+      }
+    }
+
+    ///////////////////////
+    ///     LDR         ///
+    ///////////////////////
+    if (menu == 4) {
+      menuBack = 4;
+
+      //BUTTON CALIBRATE R
+      if (p.y >= 320 && p.y <= 380
+          && p.x >= 50 && p.x <= 83) {
+        //Serial.println("BUTTON CALIBRATE R");
+        variableCalibration = "LDR_R";
+        menuKeypad();
+      }
+
+      //BUTTON MAIN MENU
+      if (p.y >= 123 && p.y <= 352
+          && p.x >= 264 && p.x <= 302) {
         //Serial.println("BUTTON MAIN");
         menuMain();
       }
@@ -419,6 +491,18 @@ void getPressed() {
               }
             }
 
+            //CALIBRATE LDR R
+            else if (variableCalibration == "LDR_R") {
+              if (updatedValue <= 15000) {
+                EEPROM.update(R_EEPROM, updatedValue / 1000);
+                REF_RESISTANCE = updatedValue;
+                Serial.print("eeprom_LDR_R,");
+                Serial.println(updatedValue);
+              } else {
+                Serial.println("numberEntered,errorUPDATE_LDR_R");
+              }
+            }
+
             numberEntered = "";
           }
           delay(150);
@@ -426,6 +510,9 @@ void getPressed() {
           switch (menuBack) {
             case 2:
               menuNTC();
+              break;
+            case 4:
+              menuLDR();
               break;
           }
         }

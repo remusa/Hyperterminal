@@ -189,7 +189,7 @@ public class Hyperterminal extends Application {
         xAxisLumensLDR.setMinorTickVisible(false);
         xAxisLumensLDR.setLabel("Tiempo");
         NumberAxis yAxisLumensLDR = new NumberAxis();
-        yAxisLumensLDR.setLabel("Temperatura");
+        yAxisLumensLDR.setLabel("Lúmenes");
         final XYChart<Number, Number> chartLumensLDR = new AreaChart<Number, Number>(xAxisLumensLDR, yAxisLumensLDR) {
             // Override to remove symbols on each data point
             @Override
@@ -360,7 +360,7 @@ public class Hyperterminal extends Application {
 
                                     break;
 
-                                case "fotoresistance":
+                                case "luxes":
 //                                    Platform.runLater(() -> System.out.println("fotoresistance: " + String.valueOf(mValueData)));
                                     dataLumensLDR.add(mValueData);
                                     break;
