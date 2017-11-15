@@ -6,10 +6,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/To do.txt" afterPath="$PROJECT_DIR$/To do.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" afterPath="$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HyperterminalArduino/HyperterminalArduino.ino" afterPath="$PROJECT_DIR$/../HyperterminalArduino/HyperterminalArduino.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HyperterminalArduino/Menu.ino" afterPath="$PROJECT_DIR$/../HyperterminalArduino/Menu.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HyperterminalArduino/Sensor_LDR.ino" afterPath="$PROJECT_DIR$/../HyperterminalArduino/Sensor_LDR.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HyperterminalArduino/Sensors.ino" afterPath="$PROJECT_DIR$/../HyperterminalArduino/Sensors.ino" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +20,8 @@
       <file leaf-file-name="Hyperterminal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="363" column="51" lean-forward="true" selection-start-line="363" selection-start-column="51" selection-end-line="363" selection-end-column="51" />
+            <state relative-caret-position="53">
+              <caret line="349" column="63" lean-forward="true" selection-start-line="349" selection-start-column="63" selection-end-line="349" selection-end-column="63" />
               <folding>
                 <element signature="e#0#20733#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -691,7 +687,8 @@
     <MESSAGE value="added TODO" />
     <MESSAGE value="added TODO, added motion sensor animation, fixed CSS stylesheet, removed EEPROM text area" />
     <MESSAGE value="added color selection &amp; Arduino files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added color selection &amp; Arduino files" />
+    <MESSAGE value="luxes graph" />
+    <option name="LAST_COMMIT_MESSAGE" value="luxes graph" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1100,8 +1097,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hyperterminal/Hyperterminal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="363" column="51" lean-forward="true" selection-start-line="363" selection-start-column="51" selection-end-line="363" selection-end-column="51" />
+        <state relative-caret-position="53">
+          <caret line="349" column="63" lean-forward="true" selection-start-line="349" selection-start-column="63" selection-end-line="349" selection-end-column="63" />
           <folding>
             <element signature="e#0#20733#0" expanded="true" />
             <element signature="imports" expanded="true" />

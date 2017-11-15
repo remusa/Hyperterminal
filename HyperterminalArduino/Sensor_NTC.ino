@@ -1,7 +1,4 @@
 void temperatureNTC() {
-  //NTC_T0 = EEPROM.read(T0_EEPROM);
-  //NTC_B = EEPROM.read(B_EEPROM);
-
   NTC_volts = analogRead(pinNTC) * 0.0048828125;
   NTC_RT = NTC_R1 * NTC_volts / (5 - NTC_volts);
   NTC_T = NTC_T0 - NTC_B * log(NTC_RT / NTC_R0); //si rt es menor a r0 la temperatura sube, resultado negativo
