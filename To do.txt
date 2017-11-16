@@ -1,21 +1,33 @@
 ---------------------------------------
-ARDUINO
+GENERAL
 ---------------------------------------
 ARDUINO:
-    [ ]Teclado por imagen en SD al LCD.
+    [ ]Teclado son imágenes leídas del SD y mostradas en el LCD.
     [X]Gráficas en LCD interactivas y continuas.
     [ ]Calibración de todos los sensores.
+    [ ]Temperatura (filtrar usando los 2 sensores).
 
 ---------------------------------------
 SENSORES
 ---------------------------------------
-PRÁCTICA 7: SENSOR DE MOVIMIENTO
+SENSOR DE TEMPERATURA LM35:
+    [ ]Checar fórmula del sensor.
+    [ ]Calibración.
+
+TERMISTOR NTC
+    [ ]Ecuación en marco teórico.
+    [X]Calibración T0, multiplicador.
+    [ ]Gráficas de temperatura y resistencia:
+        [X]Hyperterminal.
+        [X]LCD.
+
+SENSOR DE MOVIMIENTO PIR:
     [ ]Gráfica de detección de movimiento:
         [X]Hyperterminal.
         [ ]LCD.
     [X]No se calibra.
 
-PRÁCTICA 6: FOTORESISTENCIA
+FOTORESISTENCIA LDR:
     [X]Por medio de una fotorresistencia (LDR) detectar los lúmenes encontrados en el ambiente.
     [ ]Circuito: fuente de corriente vista en clase.
     [X]Gráfica de lúmenes:
@@ -23,15 +35,29 @@ PRÁCTICA 6: FOTORESISTENCIA
         [X]LCD.
     [X]Calibración.
 
-PRÁCTICA 5: SENSOR DE COLOR
+SENSOR DE COLOR:
+    [ ]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
     [X]Detectar colores: azul, amarillo, rojo, blanco y negro.
     [ ]Circuito: fuente de corriente vista en clase.
     [X]LED blanco.
-    [X]Caja de cigarros: poner papel blanco celofan para simular color (totalmente obscura, sin filtraciones).
     [X]Gráfica de color (mostrar que color es):
         [X]Hyperterminal.
         [X]LCD.
     [X]Calibración.
+
+---------------------------------------
+ACTUADORES
+---------------------------------------
+SERVOMOTOR:
+    [ ]Controlar servomotor dependiendo de luxes.
+    [ ]Servo no puede estar vibrando (frecuencia está mal), debe quedarse fijo.
+    [ ]Gráfica que diga cuantos luxes.
+
+    [ ]Controlar ventilador dependiendo de sensores de temperatura (lectura filtrada de ambos).
+    [ ]Manejar luxes (mostrar en LCD con una animación).
+
+MOTOR A PASOS:
+    [ ]Reloj que marque minutos en base a pulsos de reloj.
 
 ---------------------------------------
 REPORTE
@@ -48,46 +74,8 @@ REPORTE:
         [X]Conclusiones (problemas)
         [X]Referencias bibliográficas de libros
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
----------------------------------------
-ACTUADORES
----------------------------------------
-1.
-    -Controlar servomotor dependiendo de luxes.
-    -Servo no puede estar vibrando (frecuencia está mal), debe quedarse fijo.
-    -Gráfica que diga cuantos luxes.
-
-2.
-    -Controlar ventilador dependiendo de sensores de temperatura (lectura de ambos).
-    -Manejar luxes (mostrar en LCD con una animación).
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 ---------------------------------------
 PROYECTO FINAL
 ---------------------------------------
-    -Videojuego.
-    -Utilizar un IMU digital (acelerómetro o giróscopo).
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
----------------------------------------
-UNIDADES PASADAS
----------------------------------------
-LM35
-    -Checar fórmula del sensor
-    -Calibrar T0, multiplicador
-
-NTC
-    -Ecuación en marco teórico
-
-Gráficas:
-    -Temperatura (filtrar usando los 2 sensores).
+    [ ]Videojuego.
+    [ ]Utilizar un IMU digital (acelerómetro o giróscopo).
