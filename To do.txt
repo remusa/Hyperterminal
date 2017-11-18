@@ -50,7 +50,7 @@ ACTUADORES
 ---------------------------------------
 SERVOMOTOR:
     [ ]Controlar servomotor dependiendo de luxes.
-    [ ]Servo no puede estar vibrando (frecuencia está mal), debe quedarse fijo.
+    [ ]Servo no puede estar vibrando (frecuencia está mal), debe quedarse fijo (probar con capacitor de 470uF entre GND y V).
     [ ]Gráfica que diga cuantos luxes.
 
     [ ]Controlar ventilador dependiendo de sensores de temperatura (lectura filtrada de ambos).
